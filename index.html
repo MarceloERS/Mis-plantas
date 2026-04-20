@@ -250,8 +250,20 @@
     padding: 14px 20px;
     display: flex; align-items: center; justify-content: space-between;
     color: white; font-family: 'Playfair Display', serif; font-size: 18px;
+    cursor: pointer; user-select: none;
   }
+  .month-cal-header:hover { filter: brightness(1.08); }
+  .month-cal-header .header-left { display: flex; flex-direction: column; gap: 2px; }
   .month-cal-header .season-tag { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; }
+  .month-collapse-btn {
+    background: rgba(255,255,255,0.2); border: none; border-radius: 50%;
+    width: 28px; height: 28px; color: white; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: transform 0.25s; cursor: pointer;
+  }
+  .month-collapse-btn.collapsed { transform: rotate(-90deg); }
+  .month-cal-body { overflow: hidden; transition: max-height 0.3s ease, opacity 0.25s ease; max-height: 700px; opacity: 1; }
+  .month-cal-body.collapsed { max-height: 0 !important; opacity: 0; }
 
   .cal-weekdays {
     display: grid; grid-template-columns: repeat(7, 1fr);
@@ -470,6 +482,10 @@
         <div class="note-box">💡 También tóxica para mascotas y niños si se ingiere. Esquejes enraízan en agua en 1–2 semanas — de los más fáciles de propagar.</div>
       </div>
     </div>
+
+    <div class="plant-card">
+      <div class="plant-card-header">
+        <div class="plant-icon">🌴</div>
         <div>
           <div class="plant-name">Dracena Marginata</div>
           <span class="plant-type-badge badge-interior">Interior</span>
@@ -1167,6 +1183,21 @@
 
   let wateringDays = buildWateringDays();
   let activeFilters = new Set(plants2026.map(p => p.id));
+  let collapsedMonths = new Set(JSON.parse(localStorage.getItem('collapsedMonths') || '[]'));
+
+  function toggleMonth(m) {
+    if (collapsedMonths.has(m)) {
+      collapsedMonths.delete(m);
+    } else {
+      collapsedMonths.add(m);
+    }
+    localStorage.setItem('collapsedMonths', JSON.stringify([...collapsedMonths]));
+    // Toggle DOM directly without full re-render for smoothness
+    const body = document.getElementById(`body-${m}`);
+    const btn  = body ? body.previousElementSibling.querySelector('.month-collapse-btn') : null;
+    if (body) body.classList.toggle('collapsed', collapsedMonths.has(m));
+    if (btn)  btn.classList.toggle('collapsed', collapsedMonths.has(m));
+  }
 
   function rebuildAndRender() {
     wateringDays = buildWateringDays();
@@ -1282,17 +1313,24 @@
           .map(p => ({color: p.color, name: p.name, exterior: p.exterior}));
       }
 
+      const isCollapsed = collapsedMonths.has(m);
+
       const monthEl = document.createElement('div');
       monthEl.className = 'month-cal';
       monthEl.innerHTML = `
-        <div class="month-cal-header" style="background:${bg}">
-          <span>${monthNames[m]} 2026</span>
-          <span class="season-tag">${season.name} en Chillán</span>
+        <div class="month-cal-header" style="background:${bg}" onclick="toggleMonth(${m})">
+          <div class="header-left">
+            <span>${monthNames[m]} 2026</span>
+            <span class="season-tag">${season.name} en Chillán</span>
+          </div>
+          <button class="month-collapse-btn ${isCollapsed ? 'collapsed' : ''}" onclick="toggleMonth(${m});event.stopPropagation()">▾</button>
         </div>
-        <div class="cal-weekdays" style="background:${bg}">
-          ${weekDays.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}
+        <div class="month-cal-body ${isCollapsed ? 'collapsed' : ''}" id="body-${m}">
+          <div class="cal-weekdays" style="background:${bg}">
+            ${weekDays.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}
+          </div>
+          <div class="cal-days" id="days-${m}"></div>
         </div>
-        <div class="cal-days" id="days-${m}"></div>
       `;
       grid.appendChild(monthEl);
       const daysEl = monthEl.querySelector(`#days-${m}`);
