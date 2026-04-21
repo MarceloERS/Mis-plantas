@@ -215,8 +215,12 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
 
 .year-grid { display: flex; flex-direction: column; gap: 28px; }
 .month-cal { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); }
-.month-cal-header { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; color: white; font-family: 'Playfair Display', serif; font-size: 18px; }
+.month-cal-header { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; color: white; font-family: 'Playfair Display', serif; font-size: 18px; cursor: pointer; user-select: none; }
 .month-cal-header .season-tag { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; }
+.month-collapse-btn { background: none; border: none; color: white; font-size: 18px; opacity: 0.8; cursor: pointer; padding: 0 0 0 10px; line-height: 1; transition: transform 0.25s ease; flex-shrink: 0; }
+.month-cal.collapsed .month-collapse-btn { transform: rotate(-90deg); }
+.month-cal.collapsed .cal-weekdays,
+.month-cal.collapsed .cal-days { display: none; }
 .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); }
 .cal-weekday { text-align: center; padding: 6px 4px; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.08); }
 .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); padding: 8px; gap: 4px; }
@@ -835,13 +839,21 @@ function shiftAbsence(key) {
 function buildPlantDays(p) {
   const days = new Set();
   if (!p.exterior) {
-    for (let m=0; m<12; m++) {
-      const iv = p.intervals[m]; if (!iv) continue;
-      const dim = new Date(2026,m+1,0).getDate();
-      for (let d=1; d<=dim; d+=iv) {
-        const raw = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        days.add(shiftAbsence(raw));
+    let next = START_IDX;
+    while (next < 365) {
+      const key0 = idxToKey(next);
+      const m0 = keyToMonth(key0);
+      const iv = p.intervals[m0];
+      if (!iv) {
+        const nm = m0+1; if (nm>=12) break;
+        next = dateToIdx(`2026-${String(nm+1).padStart(2,'0')}-01`);
+        continue;
       }
+      const key = shiftAbsence(key0);
+      const waterIdx = dateToIdx(key);
+      if (waterIdx >= 365) break;
+      days.add(key);
+      next = waterIdx + iv;
     }
     return days;
   }
@@ -989,6 +1001,14 @@ const WEEKDAYS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
 const TODAY = new Date().toISOString().split('T')[0];
 const DAY_NAMES = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 
+const collapsedMonths = new Set();
+function toggleMonth(m) {
+  if (collapsedMonths.has(m)) collapsedMonths.delete(m);
+  else collapsedMonths.add(m);
+  const el = document.getElementById(`month-cal-${m}`);
+  if (el) el.classList.toggle('collapsed', collapsedMonths.has(m));
+}
+
 function renderYear() {
   const container = document.getElementById('cal2026');
   container.innerHTML = '';
@@ -1056,11 +1076,15 @@ function renderYear() {
     }
 
     const monthEl = document.createElement('div');
-    monthEl.className = 'month-cal';
+    monthEl.className = 'month-cal' + (collapsedMonths.has(m) ? ' collapsed' : '');
+    monthEl.id = `month-cal-${m}`;
     monthEl.innerHTML = `
-      <div class="month-cal-header" style="background:${bg}">
+      <div class="month-cal-header" style="background:${bg}" onclick="toggleMonth(${m})">
         <span>${MONTH_NAMES[m]} 2026</span>
-        <span class="season-tag">${s.n} en Chillán</span>
+        <div style="display:flex;align-items:center">
+          <span class="season-tag">${s.n} en Chillán</span>
+          <button class="month-collapse-btn">▾</button>
+        </div>
       </div>
       <div class="cal-weekdays" style="background:${bg}">
         ${WEEKDAYS.map(w=>`<div class="cal-weekday">${w}</div>`).join('')}
