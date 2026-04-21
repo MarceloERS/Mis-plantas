@@ -2,396 +2,320 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Bitácora de Plantas — Chillán</title>
-
-<!-- PWA -->
-<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#2d4a2a">
-<meta name="mobile-web-app-capable" content="yes">
-
-<!-- iOS específico -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mis Plantas">
-<link rel="apple-touch-icon" href="apple-touch-icon.svg">
-
-<!-- Splash screen color iOS -->
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Bitácora de Plantas — Chillán</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #f5f0e8;
-    --sage: #7a9e7e;
-    --dark-sage: #4a6741;
-    --moss: #2d4a2a;
-    --earth: #8b6f47;
-    --dusty-rose: #c4806a;
-    --lavender-muted: #9b8fb0;
-    --gold: #c9a84c;
-    --ink: #1e2820;
-    --light-sage: #d4e6d6;
-    --parchment: #ede8dc;
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background-color: var(--cream);
-    color: var(--ink);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at 10% 20%, rgba(122,158,126,0.12) 0%, transparent 50%),
-      radial-gradient(ellipse at 90% 80%, rgba(155,143,176,0.10) 0%, transparent 50%);
-  }
+:root {
+  --cream: #f5f0e8;
+  --sage: #7a9e7e;
+  --dark-sage: #4a6741;
+  --moss: #2d4a2a;
+  --earth: #8b6f47;
+  --dusty-rose: #c4806a;
+  --lavender-muted: #9b8fb0;
+  --gold: #c9a84c;
+  --ink: #1e2820;
+  --light-sage: #d4e6d6;
+  --parchment: #ede8dc;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 10% 20%, rgba(122,158,126,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(155,143,176,0.10) 0%, transparent 50%);
+}
 
-  header {
-    background: var(--moss);
-    padding: 48px 40px 36px;
-    padding-top: calc(48px + var(--safe-top));
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a6741' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.3;
-  }
-  header .leaf-deco { position: absolute; font-size: 120px; opacity: 0.07; right: -20px; top: -20px; line-height: 1; }
-  header .leaf-deco2 { position: absolute; font-size: 80px; opacity: 0.06; left: 40%; bottom: -10px; }
-  .header-inner { position: relative; z-index: 1; }
-  .header-tag {
-    display: inline-block;
-    background: rgba(201,168,76,0.25);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-family: 'Jost', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 20px;
-    margin-bottom: 16px;
-  }
-  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 52px); color: var(--cream); line-height: 1.1; margin-bottom: 8px; }
-  header h1 em { color: var(--gold); font-style: italic; }
-  header p { color: rgba(245,240,232,0.6); font-size: 14px; letter-spacing: 0.5px; }
-  .location-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(245,240,232,0.75);
-    font-size: 12px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-top: 14px;
-  }
+/* HEADER */
+header { background: var(--moss); padding: 48px 40px 36px; position: relative; overflow: hidden; }
+header::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a6741' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+header .leaf-deco { position: absolute; font-size: 120px; opacity: 0.07; right: -20px; top: -20px; line-height: 1; }
+header .leaf-deco2 { position: absolute; font-size: 80px; opacity: 0.06; left: 40%; bottom: -10px; }
+.header-inner { position: relative; z-index: 1; }
+.header-tag {
+  display: inline-block; background: rgba(201,168,76,0.25); border: 1px solid var(--gold);
+  color: var(--gold); font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
+}
+header h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 52px); color: var(--cream); line-height: 1.1; margin-bottom: 8px; }
+header h1 em { color: var(--gold); font-style: italic; }
+header p { color: rgba(245,240,232,0.6); font-size: 14px; letter-spacing: 0.5px; }
+.location-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(245,240,232,0.75); font-size: 12px; padding: 5px 14px;
+  border-radius: 20px; margin-top: 14px;
+}
 
-  .nav-tabs {
-    display: flex;
-    background: var(--parchment);
-    border-bottom: 1px solid rgba(74,103,65,0.15);
-    overflow-x: auto; scrollbar-width: none;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 12px rgba(30,40,32,0.08);
-  }
-  .nav-tabs::-webkit-scrollbar { display: none; }
-  .tab-btn {
-    flex: 0 0 auto; padding: 16px 24px; border: none; background: none; cursor: pointer;
-    font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500;
-    letter-spacing: 1px; text-transform: uppercase;
-    color: rgba(30,40,32,0.45); position: relative; transition: color 0.2s; white-space: nowrap;
-  }
-  .tab-btn::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--dark-sage); transform: scaleX(0); transition: transform 0.2s; }
-  .tab-btn.active { color: var(--dark-sage); }
-  .tab-btn.active::after { transform: scaleX(1); }
-  .tab-btn:hover { color: var(--dark-sage); }
+/* NAV */
+.nav-tabs {
+  display: flex; background: var(--parchment);
+  border-bottom: 1px solid rgba(74,103,65,0.15);
+  overflow-x: auto; scrollbar-width: none;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(30,40,32,0.08);
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: 0 0 auto; padding: 16px 22px; border: none; background: none; cursor: pointer;
+  font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: rgba(30,40,32,0.45); position: relative; transition: color 0.2s; white-space: nowrap;
+}
+.tab-btn::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--dark-sage); transform: scaleX(0); transition: transform 0.2s; }
+.tab-btn.active { color: var(--dark-sage); }
+.tab-btn.active::after { transform: scaleX(1); }
 
-  main { max-width: 900px; margin: 0 auto; padding: 32px 20px calc(60px + var(--safe-bottom)); }
-  .section { display: none; animation: fadeIn 0.35s ease; }
-  .section.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* MAIN */
+main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
+.section { display: none; animation: fadeIn 0.3s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-  .section-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--moss); margin-bottom: 6px; }
-  .section-subtitle { color: var(--earth); font-size: 13px; letter-spacing: 0.5px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid rgba(74,103,65,0.15); }
+.section-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--moss); margin-bottom: 6px; }
+.section-subtitle { color: var(--earth); font-size: 13px; letter-spacing: 0.5px; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid rgba(74,103,65,0.15); }
 
-  .plants-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px; }
-  .plant-card {
-    background: white; border-radius: 16px; overflow: hidden;
-    box-shadow: 0 2px 16px rgba(30,40,32,0.07); border: 1px solid rgba(74,103,65,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .plant-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(30,40,32,0.12); }
-  .plant-card-header { padding: 20px 20px 14px; display: flex; align-items: flex-start; gap: 14px; border-bottom: 1px solid rgba(74,103,65,0.08); }
-  .plant-icon { width: 52px; height: 52px; background: var(--light-sage); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
-  .plant-icon.exterior { background: #fce8d8; }
-  .plant-name { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--moss); margin-bottom: 2px; }
-  .plant-type-badge { display: inline-block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
-  .badge-interior { background: var(--light-sage); color: var(--dark-sage); }
-  .badge-exterior { background: #fce8d8; color: var(--earth); }
+/* INFO BOX */
+.chillan-note {
+  background: linear-gradient(135deg, #2d4a2a 0%, #4a6741 100%);
+  color: var(--cream); border-radius: 14px; padding: 18px 22px; margin-bottom: 28px;
+  font-size: 13px; line-height: 1.7; display: flex; gap: 14px; align-items: flex-start;
+}
+.chillan-note .cn-icon { font-size: 28px; flex-shrink: 0; }
+.chillan-note strong { color: var(--gold); }
 
-  .plant-card-body { padding: 16px 20px 20px; }
-  .care-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px dashed rgba(74,103,65,0.1); font-size: 13px; }
-  .care-row:last-child { border-bottom: none; }
-  .care-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-  .care-label { font-weight: 500; color: var(--dark-sage); min-width: 80px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding-top: 2px; }
-  .care-value { color: var(--ink); line-height: 1.5; }
-  .note-box { margin-top: 14px; background: #fffbf2; border-left: 3px solid var(--gold); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 12px; color: var(--earth); line-height: 1.6; }
+/* SECTION LABEL */
+.section-group-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--earth);
+  margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.section-group-label::after { content: ''; flex: 1; height: 1px; background: rgba(74,103,65,0.15); }
 
-  .calendar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
-  @media (max-width: 600px) { .calendar-grid { grid-template-columns: repeat(2, 1fr); } }
-  .month-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); }
-  .month-header { padding: 12px 16px 10px; background: var(--dark-sage); color: white; font-family: 'Playfair Display', serif; font-size: 16px; }
-  .month-header span { display: block; font-family: 'Jost', sans-serif; font-size: 10px; opacity: 0.7; letter-spacing: 1.5px; text-transform: uppercase; }
-  .month-header.verano { background: #b85c2a; }
-  .month-header.otono { background: #7a6340; }
-  .month-header.invierno { background: #3a5070; }
-  .month-header.primavera { background: var(--dark-sage); }
-  .month-tasks { padding: 12px 14px; }
-  .task-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--ink); padding: 4px 0; line-height: 1.5; }
-  .task-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-  .dot-prune { background: var(--dusty-rose); }
-  .dot-water { background: #6aabe6; }
-  .dot-transplant { background: var(--earth); }
-  .dot-fertilize { background: var(--gold); }
-  .dot-flowers { background: var(--lavender-muted); }
-  .dot-general { background: var(--sage); }
+/* PLANT CARDS */
+.plants-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px; }
+.plant-card {
+  background: white; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 2px 16px rgba(30,40,32,0.07); border: 1px solid rgba(74,103,65,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.plant-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(30,40,32,0.12); }
+.plant-card-header { padding: 20px 20px 14px; display: flex; align-items: flex-start; gap: 14px; border-bottom: 1px solid rgba(74,103,65,0.08); }
+.plant-icon { width: 52px; height: 52px; background: var(--light-sage); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.plant-icon.exterior { background: #fce8d8; }
+.plant-name { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--moss); margin-bottom: 2px; }
+.plant-type-badge { display: inline-block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+.badge-interior { background: var(--light-sage); color: var(--dark-sage); }
+.badge-exterior { background: #fce8d8; color: var(--earth); }
+.plant-card-body { padding: 16px 20px 20px; }
+.care-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px dashed rgba(74,103,65,0.1); font-size: 13px; }
+.care-row:last-child { border-bottom: none; }
+.care-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.care-label { font-weight: 500; color: var(--dark-sage); min-width: 80px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; padding-top: 2px; }
+.care-value { color: var(--ink); line-height: 1.5; }
+.note-box { margin-top: 14px; background: #fffbf2; border-left: 3px solid var(--gold); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 12px; color: var(--earth); line-height: 1.6; }
 
-  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; padding: 16px 20px; background: white; border-radius: 12px; border: 1px solid rgba(74,103,65,0.1); }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
-  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+/* SEASON CALENDAR */
+.season-strip { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.season-pill { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.sp-verano { background: #fde8d8; color: #b85c2a; }
+.sp-otono { background: #f0e8d0; color: #7a6340; }
+.sp-invierno { background: #d8e8f8; color: #3a5070; }
+.sp-primavera { background: var(--light-sage); color: var(--dark-sage); }
 
-  .season-strip {
-    display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
-  }
-  .season-pill {
-    display: flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
-  }
-  .sp-verano { background: #fde8d8; color: #b85c2a; }
-  .sp-otono { background: #f0e8d0; color: #7a6340; }
-  .sp-invierno { background: #d8e8f8; color: #3a5070; }
-  .sp-primavera { background: var(--light-sage); color: var(--dark-sage); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; padding: 16px 20px; background: white; border-radius: 12px; border: 1px solid rgba(74,103,65,0.1); }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-prune { background: var(--dusty-rose); }
+.dot-water { background: #6aabe6; }
+.dot-transplant { background: var(--earth); }
+.dot-fertilize { background: var(--gold); }
+.dot-flowers { background: var(--lavender-muted); }
+.dot-general { background: var(--sage); }
 
-  .watering-table { width: 100%; border-collapse: collapse; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 10px rgba(30,40,32,0.06); margin-bottom: 28px; }
-  .watering-table th { background: var(--moss); color: var(--cream); font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 18px; text-align: left; }
-  .watering-table td { padding: 13px 18px; border-bottom: 1px solid rgba(74,103,65,0.08); font-size: 13px; vertical-align: top; }
-  .watering-table tr:last-child td { border-bottom: none; }
-  .watering-table tr:hover td { background: rgba(122,158,126,0.05); }
-  .freq-badge { display: inline-block; background: var(--light-sage); color: var(--dark-sage); font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
-  .freq-badge.hot { background: #fce8d8; color: var(--earth); }
-  .freq-badge.winter { background: #e8edf8; color: #5470a0; }
+.calendar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+@media (max-width: 600px) { .calendar-grid { grid-template-columns: repeat(2, 1fr); } }
+.month-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); }
+.month-header { padding: 12px 16px 10px; color: white; font-family: 'Playfair Display', serif; font-size: 16px; }
+.month-header span { display: block; font-family: 'Jost', sans-serif; font-size: 10px; opacity: 0.7; letter-spacing: 1.5px; text-transform: uppercase; }
+.month-header.verano { background: #b85c2a; }
+.month-header.otono { background: #7a6340; }
+.month-header.invierno { background: #3a5070; }
+.month-header.primavera { background: var(--dark-sage); }
+.month-tasks { padding: 12px 14px; }
+.task-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--ink); padding: 4px 0; line-height: 1.5; }
+.task-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
 
-  .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-  .tip-card { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); display: flex; gap: 14px; align-items: flex-start; }
-  .tip-emoji { font-size: 28px; flex-shrink: 0; }
-  .tip-content h4 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--moss); margin-bottom: 6px; }
-  .tip-content p { font-size: 13px; color: #5a6a5c; line-height: 1.6; }
+/* WATERING TABLE */
+.watering-table { width: 100%; border-collapse: collapse; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 10px rgba(30,40,32,0.06); margin-bottom: 28px; }
+.watering-table th { background: var(--moss); color: var(--cream); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 18px; text-align: left; }
+.watering-table td { padding: 13px 18px; border-bottom: 1px solid rgba(74,103,65,0.08); font-size: 13px; vertical-align: top; }
+.watering-table tr:last-child td { border-bottom: none; }
+.watering-table tr:hover td { background: rgba(122,158,126,0.05); }
+.freq-badge { display: inline-block; background: var(--light-sage); color: var(--dark-sage); font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+.freq-badge.hot { background: #fce8d8; color: var(--earth); }
+.freq-badge.winter { background: #e8edf8; color: #5470a0; }
 
-  .journal-area { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); margin-bottom: 24px; }
-  .journal-area h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--moss); margin-bottom: 16px; }
-  .journal-form { display: flex; flex-direction: column; gap: 14px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
-  .form-group { display: flex; flex-direction: column; gap: 6px; }
-  .form-group label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--dark-sage); }
-  .form-group input, .form-group select, .form-group textarea { border: 1px solid rgba(74,103,65,0.2); border-radius: 8px; padding: 10px 14px; font-family: 'Jost', sans-serif; font-size: 14px; color: var(--ink); background: var(--cream); transition: border-color 0.2s; outline: none; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--sage); background: white; }
-  .form-group textarea { resize: vertical; min-height: 80px; }
-  .btn-save { background: var(--dark-sage); color: white; border: none; border-radius: 10px; padding: 13px 28px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s, transform 0.1s; align-self: flex-start; }
-  .btn-save:hover { background: var(--moss); }
-  .btn-save:active { transform: scale(0.98); }
-  .entries-list { display: flex; flex-direction: column; gap: 12px; }
-  .entry-item { background: var(--parchment); border-radius: 12px; padding: 16px 18px; border-left: 4px solid var(--sage); position: relative; }
-  .entry-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
-  .entry-plant { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--moss); }
-  .entry-date { font-size: 11px; color: var(--earth); }
-  .entry-action { display: inline-block; font-size: 10px; background: var(--light-sage); color: var(--dark-sage); padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
-  .entry-note { font-size: 13px; color: #5a6a5c; line-height: 1.5; }
-  .entry-delete { position: absolute; top: 12px; right: 12px; background: none; border: none; cursor: pointer; font-size: 16px; color: rgba(30,40,32,0.25); transition: color 0.2s; padding: 2px; }
-  .entry-delete:hover { color: var(--dusty-rose); }
-  .empty-state { text-align: center; padding: 40px 20px; color: rgba(30,40,32,0.35); font-style: italic; }
+/* TIPS */
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.tip-card { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); display: flex; gap: 14px; align-items: flex-start; }
+.tip-emoji { font-size: 28px; flex-shrink: 0; }
+.tip-content h4 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--moss); margin-bottom: 6px; }
+.tip-content p { font-size: 13px; color: #5a6a5c; line-height: 1.6; }
 
-  .section-group-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--earth); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-  .section-group-label::after { content: ''; flex: 1; height: 1px; background: rgba(74,103,65,0.15); }
+/* JOURNAL */
+.journal-area { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); margin-bottom: 24px; }
+.journal-area h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--moss); margin-bottom: 16px; }
+.journal-form { display: flex; flex-direction: column; gap: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--dark-sage); }
+.form-group input, .form-group select, .form-group textarea {
+  border: 1px solid rgba(74,103,65,0.2); border-radius: 8px; padding: 10px 14px;
+  font-family: 'Jost', sans-serif; font-size: 14px; color: var(--ink);
+  background: var(--cream); transition: border-color 0.2s; outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--sage); background: white; }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.btn-save { background: var(--dark-sage); color: white; border: none; border-radius: 10px; padding: 13px 28px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s; align-self: flex-start; }
+.btn-save:hover { background: var(--moss); }
+.entries-list { display: flex; flex-direction: column; gap: 12px; }
+.entry-item { background: var(--parchment); border-radius: 12px; padding: 16px 18px; border-left: 4px solid var(--sage); position: relative; }
+.entry-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.entry-plant { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--moss); }
+.entry-date { font-size: 11px; color: var(--earth); }
+.entry-action { display: inline-block; font-size: 10px; background: var(--light-sage); color: var(--dark-sage); padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+.entry-note { font-size: 13px; color: #5a6a5c; line-height: 1.5; }
+.entry-delete { position: absolute; top: 12px; right: 12px; background: none; border: none; cursor: pointer; font-size: 16px; color: rgba(30,40,32,0.25); transition: color 0.2s; padding: 2px; }
+.entry-delete:hover { color: var(--dusty-rose); }
+.empty-state { text-align: center; padding: 40px 20px; color: rgba(30,40,32,0.35); font-style: italic; }
 
-  .chillan-note {
-    background: linear-gradient(135deg, #2d4a2a 0%, #4a6741 100%);
-    color: var(--cream);
-    border-radius: 14px;
-    padding: 18px 22px;
-    margin-bottom: 28px;
-    font-size: 13px;
-    line-height: 1.7;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .chillan-note .cn-icon { font-size: 28px; flex-shrink: 0; }
-  .chillan-note strong { color: var(--gold); }
+/* RIEGO 2026 */
+.filter-btn {
+  padding: 6px 14px; border-radius: 20px; border: 1.5px solid transparent;
+  font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.filter-btn:not(.active) { background: white; border-color: rgba(74,103,65,0.2); color: var(--ink); }
 
-  /* RIEGO 2026 */
-  .filter-btn {
-    padding: 6px 14px; border-radius: 20px; border: 1.5px solid transparent;
-    font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
-    cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn.active { color: white; border-color: transparent; }
-  .filter-btn:not(.active) { background: white; border-color: rgba(74,103,65,0.2); color: var(--ink); }
+.year-grid { display: flex; flex-direction: column; gap: 28px; }
+.month-cal { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); }
+.month-cal-header { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; color: white; font-family: 'Playfair Display', serif; font-size: 18px; }
+.month-cal-header .season-tag { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; }
+.cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); }
+.cal-weekday { text-align: center; padding: 6px 4px; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.08); }
+.cal-days { display: grid; grid-template-columns: repeat(7, 1fr); padding: 8px; gap: 4px; }
+.cal-day { aspect-ratio: 1; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 12px; font-weight: 400; position: relative; cursor: pointer; min-width: 0; transition: transform 0.1s; }
+.cal-day:hover { transform: scale(1.08); }
+.cal-day.empty { background: none; pointer-events: none; }
+.cal-day.normal { background: rgba(74,103,65,0.04); color: var(--ink); }
+.cal-day.normal:hover { background: #f0f4f0; }
+.cal-day.has-watering { background: #e8f4fd; }
+.cal-day.has-watering:hover { background: #d0eaf8; }
+.cal-day.is-rain-moderate { background: linear-gradient(135deg, #4a90d9, #7ec8e3); }
+.cal-day.is-rain-intense { background: linear-gradient(135deg, #1a3a5c, #2e6098); }
+.cal-day.is-absent { background: linear-gradient(135deg, #f5a623, #f7d97a); }
+.cal-day.today-mark { outline: 2px solid var(--gold); outline-offset: -2px; }
+.cal-day .day-num { font-size: 12px; line-height: 1; }
+.cal-day .drop-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; margin-top: 3px; }
+.cal-day .drop { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+@media (max-width: 500px) {
+  .cal-day { border-radius: 5px; }
+  .cal-day .day-num { font-size: 10px; }
+  .cal-day .drop { width: 4px; height: 4px; }
+}
 
-  .year-grid { display: flex; flex-direction: column; gap: 28px; }
+.drop-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 14px 18px; background: white; border-radius: 12px; border: 1px solid rgba(74,103,65,0.1); }
+.drop-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.drop-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-  .month-cal { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 10px rgba(30,40,32,0.06); border: 1px solid rgba(74,103,65,0.1); }
-  .month-cal-header {
-    padding: 14px 20px;
-    display: flex; align-items: center; justify-content: space-between;
-    color: white; font-family: 'Playfair Display', serif; font-size: 18px;
-    cursor: pointer; user-select: none;
-  }
-  .month-cal-header:hover { filter: brightness(1.08); }
-  .month-cal-header .header-left { display: flex; flex-direction: column; gap: 2px; }
-  .month-cal-header .season-tag { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; }
-  .month-collapse-btn {
-    background: rgba(255,255,255,0.2); border: none; border-radius: 50%;
-    width: 28px; height: 28px; color: white; font-size: 14px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: transform 0.25s; cursor: pointer;
-  }
-  .month-collapse-btn.collapsed { transform: rotate(-90deg); }
-  .month-cal-body { overflow: hidden; transition: max-height 0.3s ease, opacity 0.25s ease; max-height: 700px; opacity: 1; }
-  .month-cal-body.collapsed { max-height: 0 !important; opacity: 0; }
+/* DAY POPUP */
+.day-popup-overlay {
+  position: fixed; inset: 0; background: rgba(30,40,32,0.45);
+  z-index: 1000; display: flex; align-items: center; justify-content: center;
+  padding: 20px; animation: fadeIn 0.15s ease;
+}
+.day-popup {
+  background: white; border-radius: 18px; padding: 24px 24px 20px;
+  max-width: 340px; width: 100%;
+  box-shadow: 0 12px 48px rgba(30,40,32,0.22);
+  position: relative; animation: popIn 0.18s ease;
+  max-height: 90vh; overflow-y: auto;
+}
+@keyframes popIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
+.day-popup-date { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--moss); margin-bottom: 4px; }
+.day-popup-season { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--earth); margin-bottom: 16px; }
+.day-popup-close {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--light-sage); border: none; border-radius: 50%;
+  width: 28px; height: 28px; font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--dark-sage);
+}
+.popup-plant-list { display: flex; flex-direction: column; gap: 8px; }
+.popup-plant-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--cream); border-radius: 10px; padding: 10px 14px;
+  font-size: 14px; color: var(--ink);
+}
+.popup-plant-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.popup-no-water { text-align: center; padding: 18px 0 4px; color: rgba(30,40,32,0.4); font-size: 14px; font-style: italic; }
+.rain-section { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(74,103,65,0.15); }
+.rain-section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7a6340; margin-bottom: 10px; }
+.rain-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.rain-btn {
+  flex: 1; padding: 8px 10px; border-radius: 10px; border: 2px solid rgba(74,103,65,0.2);
+  background: white; cursor: pointer; font-size: 13px; font-family: 'Jost', sans-serif;
+  transition: all 0.15s;
+}
+.rain-btn.selected-moderate { border-color: #4a90d9; background: #e8f4fd; }
+.rain-btn.selected-intense { border-color: #1a3a5c; background: #d0e0f0; }
+.rain-btn.remove { border-color: #e57373; color: #c62828; }
+.rain-status { margin-top: 8px; font-size: 12px; color: #1a3a5c; background: #e8f0f8; padding: 8px 12px; border-radius: 8px; }
+.rain-hint { margin-top: 8px; font-size: 12px; color: #7a6340; font-style: italic; }
+.absence-section { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(74,103,65,0.15); }
+.absence-section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #7a5000; margin-bottom: 10px; }
+.absence-btn { flex: 1; padding: 8px 10px; border-radius: 10px; border: 2px solid rgba(245,166,35,0.4); background: white; cursor: pointer; font-size: 13px; font-family: 'Jost', sans-serif; transition: all 0.15s; }
+.absence-btn.remove { border-color: #e57373; color: #c62828; }
+.absence-status { margin-top: 8px; font-size: 12px; color: #7a5000; background: #fff8e7; padding: 8px 12px; border-radius: 8px; border: 1px solid #f5d06b; }
 
-  .cal-weekdays {
-    display: grid; grid-template-columns: repeat(7, 1fr);
-    background: rgba(0,0,0,0.06);
-  }
-  .cal-weekday { text-align: center; padding: 6px 4px; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+/* DATA TOOLBAR */
+.data-toolbar {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  background: white; border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+  border: 1px solid rgba(74,103,65,0.12); box-shadow: 0 1px 8px rgba(30,40,32,0.05);
+}
+.data-toolbar-label { font-size: 12px; font-weight: 500; color: #4a6741; text-transform: uppercase; letter-spacing: 1px; flex: 1 1 100%; }
+.btn-export { display: flex; align-items: center; gap: 6px; padding: 9px 18px; background: #4a6741; color: white; border: none; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn-import-label { display: flex; align-items: center; gap: 6px; padding: 9px 18px; background: white; color: #4a6741; border: 2px solid #4a6741; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
+#dataStatus { font-size: 12px; color: #7a9e7e; font-style: italic; }
 
-  .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); padding: 8px; gap: 4px; }
-  .cal-day {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 400;
-    position: relative; cursor: default;
-    min-width: 0;
-  }
-  .cal-day.empty { background: none; }
-  .cal-day.normal { background: rgba(74,103,65,0.04); color: var(--ink); }
-  .cal-day.has-watering { background: #e8f4fd; }
-  .cal-day .day-num { font-size: 12px; line-height: 1; z-index: 1; }
-  .cal-day .drop-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; margin-top: 3px; }
-  .cal-day .drop { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-  .cal-day.today-mark { outline: 2px solid var(--gold); outline-offset: -2px; }
-
-  .drop-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 14px 18px; background: white; border-radius: 12px; border: 1px solid rgba(74,103,65,0.1); }
-  .drop-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
-  .drop-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-
-  @media (max-width: 500px) {
-    .cal-day { border-radius: 5px; }
-    .cal-day .day-num { font-size: 10px; }
-    .cal-day .drop { width: 4px; height: 4px; }
-  }
-
-  /* DAY POPUP */
-  .day-popup-overlay {
-    position: fixed; inset: 0; background: rgba(30,40,32,0.45);
-    z-index: 1000; display: flex; align-items: center; justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.15s ease;
-  }
-  .day-popup {
-    background: white; border-radius: 18px;
-    padding: 24px 24px 20px;
-    max-width: 340px; width: 100%;
-    box-shadow: 0 12px 48px rgba(30,40,32,0.22);
-    position: relative;
-    animation: popIn 0.18s ease;
-  }
-  @keyframes popIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
-  .day-popup-date {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; color: var(--moss);
-    margin-bottom: 4px;
-  }
-  .day-popup-season {
-    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--earth); margin-bottom: 16px;
-  }
-  .day-popup-close {
-    position: absolute; top: 16px; right: 16px;
-    background: var(--light-sage); border: none; border-radius: 50%;
-    width: 28px; height: 28px; font-size: 14px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--dark-sage); transition: background 0.15s;
-  }
-  .day-popup-close:hover { background: #b8d4ba; }
-  .popup-plant-list { display: flex; flex-direction: column; gap: 8px; }
-  .popup-plant-item {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--cream); border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 14px; color: var(--ink);
-  }
-  .popup-plant-dot {
-    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
-  }
-  .popup-plant-name { font-weight: 400; }
-  .popup-no-water {
-    text-align: center; padding: 18px 0 4px;
-    color: rgba(30,40,32,0.4); font-size: 14px; font-style: italic;
-  }
-  .cal-day.has-watering { cursor: pointer; }
-  .cal-day.has-watering:hover { background: #d0eaf8; transform: scale(1.08); transition: transform 0.1s; }
-
-  /* Rain states */
-  .cal-day.is-rain-moderate { background: #ddeeff !important; cursor: pointer; }
-  .cal-day.is-rain-moderate:hover { background: #cce0ff !important; transform: scale(1.08); transition: transform 0.1s; }
-  .cal-day.is-rain-moderate .day-num { color: #1a56a0 !important; font-weight: 600 !important; }
-  .cal-day.is-rain-heavy { background: #c5d8ff !important; cursor: pointer; }
-  .cal-day.is-rain-heavy:hover { background: #b0c8ff !important; transform: scale(1.08); transition: transform 0.1s; }
-  .cal-day.is-rain-heavy .day-num { color: #0d3b8c !important; font-weight: 600 !important; }
-
-  /* Absence state */
-  .cal-day.is-absent { background: #fff3e0 !important; cursor: pointer; }
-  .cal-day.is-absent:hover { background: #ffe0b2 !important; transform: scale(1.08); transition: transform 0.1s; }
-  .cal-day.is-absent .day-num { color: #e65100 !important; font-weight: 600 !important; }
-
-  .rain-icon { font-size: 9px; line-height: 1; margin-top: 2px; display: block; text-align: center; }
-  .cal-day.normal { cursor: pointer; }
-  .cal-day.normal:hover { background: rgba(74,103,65,0.1); transform: scale(1.04); transition: transform 0.1s; }
-
-  /* Popup action buttons */
-  .popup-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
-  .popup-action-btn {
-    width: 100%; padding: 11px 14px; border-radius: 10px; border: 1.5px solid transparent;
-    font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500;
-    cursor: pointer; transition: all 0.18s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-rain-moderate { background: white; color: #1a56a0; border-color: #6aabe6; }
-  .btn-rain-moderate:hover { background: #ddeeff; }
-  .btn-rain-moderate.active { background: #1a56a0; color: white; border-color: #1a56a0; }
-  .btn-rain-heavy { background: white; color: #0d3b8c; border-color: #3a6fd8; }
-  .btn-rain-heavy:hover { background: #c5d8ff; }
-  .btn-rain-heavy.active { background: #0d3b8c; color: white; border-color: #0d3b8c; }
-  .btn-absent { background: white; color: #e65100; border-color: #ffb74d; }
-  .btn-absent:hover { background: #fff3e0; }
-  .btn-absent.active { background: #e65100; color: white; border-color: #e65100; }
-  .popup-action-note { font-size: 11px; color: var(--earth); text-align: center; margin-top: 6px; line-height: 1.5; }
-
-  /* Summary badges */
-  .summary-badge {
-    border-radius: 10px; padding: 10px 16px; margin-bottom: 12px;
-    font-size: 13px; display: flex; align-items: center; gap: 8px;
-  }
-  .badge-rain { background: #ddeeff; border: 1px solid #6aabe6; color: #1a56a0; }
-  .badge-absent { background: #fff3e0; border: 1px solid #ffb74d; color: #e65100; }
+/* PWA install banner */
+#installBanner {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--moss); color: white; padding: 14px 20px;
+  z-index: 200; align-items: center; gap: 12px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+}
+#installBanner p { flex: 1; font-size: 14px; }
+#installBanner button { padding: 8px 18px; border-radius: 8px; border: none; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; }
+.btn-install { background: var(--gold); color: var(--moss); }
+.btn-dismiss { background: transparent; color: rgba(255,255,255,0.6); }
 </style>
 </head>
 <body>
@@ -408,25 +332,23 @@
 </header>
 
 <nav class="nav-tabs">
-  <button class="tab-btn active" onclick="showSection('plantas', this)">🪴 Mis Plantas</button>
-  <button class="tab-btn" onclick="showSection('riego2026', this)">🗓️ Calendario de Riego</button>
-  <button class="tab-btn" onclick="showSection('calendario', this)">📅 Mes a Mes</button>
-  <button class="tab-btn" onclick="showSection('riego', this)">💧 Riego</button>
-  <button class="tab-btn" onclick="showSection('consejos', this)">🌱 Consejos</button>
+  <button class="tab-btn active" onclick="showSection('plantas',this)">🪴 Mis Plantas</button>
+  <button class="tab-btn" onclick="showSection('riego2026',this)">🗓️ Riego 2026</button>
+  <button class="tab-btn" onclick="showSection('calendario',this)">📅 Calendario</button>
+  <button class="tab-btn" onclick="showSection('riego',this)">💧 Riego</button>
+  <button class="tab-btn" onclick="showSection('consejos',this)">🌱 Consejos</button>
+  <button class="tab-btn" onclick="showSection('diario',this)">📓 Diario</button>
 </nav>
 
 <main>
 
-<!-- ── PLANTAS ── -->
+<!-- ══ PLANTAS ══ -->
 <section id="plantas" class="section active">
   <h2 class="section-title">Mis Plantas</h2>
   <p class="section-subtitle">Guía adaptada al clima de Chillán — hemisferio sur</p>
-
   <div class="chillan-note">
     <div class="cn-icon">🌎</div>
-    <div>
-      <strong>Adaptado a Chillán, Chile.</strong> Las estaciones están invertidas respecto a Europa. En Chillán: <strong>Verano = Dic–Feb · Otoño = Mar–May · Invierno = Jun–Ago · Primavera = Sep–Nov.</strong> El clima es mediterráneo con veranos secos y calurosos (hasta 30°C) e inviernos fríos y lluviosos (desde 4°C).
-    </div>
+    <div><strong>Adaptado a Chillán, Chile.</strong> Las estaciones están invertidas respecto a Europa. En Chillán: <strong>Verano = Dic–Feb · Otoño = Mar–May · Invierno = Jun–Ago · Primavera = Sep–Nov.</strong> Clima mediterráneo: veranos secos y calurosos (hasta 30°C) e inviernos fríos y lluviosos (desde 4°C).</div>
   </div>
 
   <div class="section-group-label">Interior</div>
@@ -435,124 +357,72 @@
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon">🌿</div>
-        <div>
-          <div class="plant-name">Monstera</div>
-          <span class="plant-type-badge badge-interior">Interior</span>
-        </div>
+        <div><div class="plant-name">Monstera</div><span class="plant-type-badge badge-interior">Interior</span></div>
       </div>
       <div class="plant-card-body">
         <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Ago–Sep (antes de la primavera chilena). Retira hojas amarillas o dañadas todo el año.</span></div>
         <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Sep–Oct (primavera). Ideal para separar también la planta hija que brotó de la base.</span></div>
-        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Follaje</span><span class="care-value">Limpia las hojas con paño húmedo 1 vez al mes. En verano (Dic–Feb) puede necesitar más humedad ambiental.</span></div>
+        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Follaje</span><span class="care-value">Limpia las hojas con paño húmedo 1 vez al mes. En verano puede necesitar más humedad ambiental.</span></div>
         <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta. En invierno (Jun–Ago) aléjala de ventanas muy frías. Evita calefacción directa.</span></div>
-        <div class="note-box">💡 La planta hija que brotó puede separarse en septiembre u octubre. Espera a que tenga 2–3 hojas y raíces propias. Usa tijeras esterilizadas y plántala en sustrato fresco.</div>
+        <div class="note-box">💡 La planta hija puede separarse en sep–oct cuando tenga 2–3 hojas y raíces propias. Usa tijeras esterilizadas.</div>
       </div>
     </div>
 
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon">🍃</div>
-        <div>
-          <div class="plant-name">Philodendron Brasil</div>
-          <span class="plant-type-badge badge-interior">Interior · ×2</span>
-        </div>
+        <div><div class="plant-name">Philodendron Brasil</div><span class="plant-type-badge badge-interior">Interior · ×2</span></div>
       </div>
       <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Sep–Mar (primavera y verano chileno). Corta guías largas justo por encima de un nudo para estimular ramificación y mantener la forma.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 1–2 años en septiembre u octubre, cuando las raíces asoman por el drenaje. Al tener dos plantas, revísalas por separado.</span></div>
-        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Variegado</span><span class="care-value">Si aparecen hojas completamente verdes (sin amarillo), córtalas desde la base — tienden a dominar y pierdes la variagación.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta brillante para mantener el variegado verde-amarillo. Poca luz = hojas más verdes y menos vistosas.</span></div>
-        <div class="note-box">💡 Los esquejes enraízan fácilmente en agua en 2–3 semanas — corta por debajo de un nudo aéreo. ¡Son el regalo perfecto! Tóxica para mascotas y niños si se ingiere.</div>
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Sep–Mar (primavera y verano). Corta guías largas por encima de un nudo para estimular ramificación.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 1–2 años en sep–oct cuando las raíces asoman por el drenaje. Revísalas por separado.</span></div>
+        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Variegado</span><span class="care-value">Si aparecen hojas completamente verdes (sin amarillo), córtalas desde la base — tienden a dominar y pierdes la variegación.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta brillante para mantener el variegado verde-amarillo. Poca luz = hojas más verdes.</span></div>
+        <div class="note-box">💡 Esquejes enraízan en agua en 2–3 semanas. Tóxica para mascotas y niños si se ingiere.</div>
       </div>
     </div>
 
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon">🌿</div>
-        <div>
-          <div class="plant-name">Golden Pothos</div>
-          <span class="plant-type-badge badge-interior">Interior · ×2</span>
-        </div>
+        <div><div class="plant-name">Golden Pothos</div><span class="plant-type-badge badge-interior">Interior · ×2</span></div>
       </div>
       <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Sep–Mar (primavera y verano). Corta guías largas por encima de un nudo para mantener la forma y densidad.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 1–2 años en septiembre u octubre. Señal: raíces saliendo por el drenaje o crecimiento muy lento.</span></div>
-        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Variegado</span><span class="care-value">Como el Philodendron Brasil: si aparecen hojas completamente verdes (sin dorado), córtalas desde la base para preservar el variegado.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Muy adaptable, tolera baja luz, pero con luz indirecta brillante el variegado dorado es más intenso y vistoso.</span></div>
-        <div class="note-box">💡 También tóxica para mascotas y niños si se ingiere. Esquejes enraízan en agua en 1–2 semanas — de los más fáciles de propagar.</div>
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Sep–Mar (primavera y verano). Corta guías largas por encima de un nudo para mantener forma y densidad.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 1–2 años en sep–oct. Señal: raíces saliendo por el drenaje o crecimiento muy lento.</span></div>
+        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Variegado</span><span class="care-value">Si aparecen hojas completamente verdes (sin dorado), córtalas desde la base para preservar el variegado.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Muy adaptable, tolera baja luz, pero con luz indirecta brillante el dorado es más intenso.</span></div>
+        <div class="note-box">💡 Esquejes enraízan en agua en 1–2 semanas. Tóxica para mascotas y niños si se ingiere.</div>
       </div>
     </div>
 
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon">🌴</div>
-        <div>
-          <div class="plant-name">Dracena Marginata</div>
-          <span class="plant-type-badge badge-interior">Interior</span>
-        </div>
+        <div><div class="plant-name">Dracena Marginata</div><span class="plant-type-badge badge-interior">Interior</span></div>
       </div>
       <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Sep–Oct (primavera). Corta el tallo principal a la altura deseada para controlar el tamaño y estimular brotes laterales.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 2 años en septiembre u octubre. Solo cuando las raíces asoman por el drenaje. Usa maceta apenas 2–3 cm más grande.</span></div>
-        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Follaje</span><span class="care-value">Retira hojas amarillas o marrones de la base regularmente. Limpia las hojas con paño húmedo cada 1–2 meses.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta brillante a media. Evita sol directo (quema las hojas). No soporta temperaturas bajo 12°C — aléjala de ventanas en invierno de Chillán.</span></div>
-        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Muy sensible al exceso. Deja secar bien el sustrato entre riegos. Muy sensible al flúor del agua — usa agua reposada o filtrada.</span></div>
-        <div class="note-box">💡 Las puntas marrones en las hojas suelen ser por flúor en el agua o aire muy seco. Usa agua reposada 24h y aleja de calefactores. Es una de las plantas más purificadoras de aire de interior.</div>
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Sep–Oct (primavera). Corta el tallo a la altura deseada para controlar tamaño y estimular brotes laterales.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 2 años en sep–oct. Solo cuando las raíces asoman por el drenaje. Maceta apenas 2–3 cm más grande.</span></div>
+        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Follaje</span><span class="care-value">Retira hojas amarillas o marrones de la base regularmente. Limpia con paño húmedo cada 1–2 meses.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta brillante a media. No soporta bajo 12°C — aléjala de ventanas en invierno de Chillán.</span></div>
+        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Sensible al exceso. Deja secar bien el sustrato entre riegos. Muy sensible al flúor — usa agua reposada.</span></div>
+        <div class="note-box">💡 Puntas marrones = flúor en el agua o aire muy seco. Usa agua reposada 24h y aléjala de calefactores.</div>
       </div>
     </div>
 
     <div class="plant-card">
       <div class="plant-card-header">
-        <div class="plant-icon">🌵</div>
-        <div>
-          <div class="plant-name">Lengua de Suegra</div>
-          <span class="plant-type-badge badge-interior">Interior · Recién plantada</span>
-        </div>
+        <div class="plant-icon">🌿</div>
+        <div><div class="plant-name">Chamaedorea</div><span class="plant-type-badge badge-interior">Interior</span></div>
       </div>
       <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Ahora</span><span class="care-value">Recién plantada con enraizante — no riegues por 3–4 semanas. Deja que las raíces busquen la humedad del sustrato.</span></div>
-        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Una vez establecida: cada 3–4 semanas en verano, cada 6–8 semanas en invierno. Es la planta más tolerante a la sequía que tienes.</span></div>
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Raramente necesaria. Solo retira hojas dañadas desde la base con tijeras limpias.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 2–3 años en primavera (Sep–Oct). Florece mejor cuando está apretada — no apures el trasplante.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Extremadamente adaptable. Tolera desde poca luz hasta sol indirecto brillante. No bajes de 10°C.</span></div>
-        <div class="note-box">💡 La causa de muerte número uno de la Sansevieria es el exceso de riego — podredumbre de raíz. En invierno de Chillán puede pasar meses sin agua. Si dudas, no riegues.</div>
-      </div>
-    </div>
-
-    <div class="plant-card">
-      <div class="plant-card-header">
-        <div class="plant-icon">🌸</div>
-        <div>
-          <div class="plant-name">Orquídea Phalaenopsis</div>
-          <span class="plant-type-badge badge-interior">Interior · Sustrato musgo</span>
-        </div>
-      </div>
-      <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Con musgo: riega cuando el musgo esté casi seco al tacto (cada 10–14 días). Sumerge la maceta 10 min en agua y deja escurrir bien.</span></div>
-        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Actualmente en floración — no muevas ni trasplantes. Cuando caigan todas las flores, corta la vara floral sobre un nudo visible.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Solo post-floración, cada 1–2 años. Cambia el musgo por corteza de orquídea o musgo fresco. Nunca tierra normal.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta brillante — ideal junto a ventana con cortina. Para que vuelva a florecer necesita diferencia de temperatura día/noche de ~5°C.</span></div>
-        <div class="care-row"><span class="care-icon">🧴</span><span class="care-label">Fertilizar</span><span class="care-value">Solo cuando NO está en flor. Usa fertilizante específico para orquídeas, diluido a la mitad, cada 15–20 días en primavera/verano.</span></div>
-        <div class="note-box">💡 Las raíces verdes = bien hidratadas. Raíces grises/plateadas = necesita agua. Si las raíces se ven por la maceta transparente, puedes monitorear sin abrir. El fertilizante ERGO Follaje que tienes NO es el ideal — busca uno específico para orquídeas.</div>
-      </div>
-    </div>
-
-    <div class="plant-card">
-      <div class="plant-card-header">
-        <div class="plant-icon">🌴</div>
-        <div>
-          <div class="plant-name">Chamaedorea elegans</div>
-          <span class="plant-type-badge badge-interior">Interior · Palma de salón</span>
-        </div>
-      </div>
-      <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Cada 7–10 días en verano, cada 14–18 días en invierno. Mantén el sustrato levemente húmedo — no tolera ni sequía extrema ni encharcamiento.</span></div>
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Solo retira frondas (hojas) completamente amarillas o secas cortando desde la base del tallo. Nunca cortes la punta del tallo principal — mata la palma.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 2–3 años en primavera (Sep–Oct). Crece lento — no apures el trasplante. Usa maceta con muy buen drenaje.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta media a baja — tolera lugares con poca luz mejor que la mayoría. Evita sol directo (quema las frondas). Ideal entre 16–26°C.</span></div>
-        <div class="care-row"><span class="care-icon">💦</span><span class="care-label">Humedad</span><span class="care-value">Le gusta la humedad ambiental. En el invierno seco de Chillán con calefacción, pulveriza las hojas 2–3 veces por semana o pon un platillo con agua cerca.</span></div>
-        <div class="care-row"><span class="care-icon">🧴</span><span class="care-label">Fertilizar</span><span class="care-value">Sep–Mar, cada 20–30 días con fertilizante líquido para plantas verdes. El ERGO Follaje que tienes le va perfecto.</span></div>
-        <div class="note-box">💡 La araña roja es su enemiga número uno — el ambiente seco la favorece. Revisa el envés de las frondas semanalmente. Si aparece, aumenta la humedad y trata con jabón potásico. Las puntas marrones suelen ser por baja humedad o agua con cloro.</div>
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Solo retira hojas amarillas o marrones en cualquier época. No requiere poda de forma — cada fronda sale desde la base.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 2–3 años en sep–oct (primavera). Solo cuando las raíces asomen por el drenaje. Le gusta estar un poco apretada.</span></div>
+        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Follaje</span><span class="care-value">Limpia las frondas con paño húmedo cada mes. En el verano seco de Chillán, rocíalas ocasionalmente para mantener humedad.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta. Evita sol directo — quema las frondas. No soporta bajo 10°C — aléjala de ventanas en invierno de Chillán.</span></div>
+        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Sensible al flúor igual que la Dracena. Deja reposar el agua 24h. Espera que el tercio superior del sustrato seque entre riegos.</span></div>
+        <div class="note-box">💡 Muy susceptible a la araña roja en veranos secos. Revisa el envés de las frondas en dic–feb. La humedad ambiental la protege.</div>
       </div>
     </div>
 
@@ -563,86 +433,56 @@
 
     <div class="plant-card">
       <div class="plant-card-header">
-        <div class="plant-icon exterior">🌿</div>
-        <div>
-          <div class="plant-name">Ruda</div>
-          <span class="plant-type-badge badge-exterior">Exterior · Aromática</span>
-        </div>
-      </div>
-      <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">2 veces al año: Sep–Oct (primavera, poda de forma, no más del 30%) y Feb–Mar (post-floración). Estimula el crecimiento y evita que se lignifique rápido.</span></div>
-        <div class="care-row"><span class="care-icon">🌼</span><span class="care-label">Flores</span><span class="care-value">Floración: Nov–Ene (primavera–verano). Si no quieres que se auto-siembre, corta las flores antes de que formen semillas.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Muy resistente — trasplanta solo si necesita más espacio, en primavera (Sep–Oct). Tolera maceta.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Pleno sol o semisombra. Muy resistente al frío de Chillán y a la sequía. Suelo bien drenado — odia los pies mojados.</span></div>
-        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Muy frugal. Cada 10–14 días en verano, casi nada en invierno (la lluvia basta). Tolera sequía mucho mejor que el exceso de agua.</span></div>
-        <div class="note-box">⚠️ La ruda es fotosensibilizante — el contacto con sus hojas bajo el sol puede causar quemaduras en la piel. Usa guantes para podarla y lávate bien las manos. Evita que niños pequeños la manipulen. Es una planta con gran tradición en Chile, muy resistente y aromática.</div>
-      </div>
-    </div>
-
-    <div class="plant-card">
-      <div class="plant-card-header">
         <div class="plant-icon exterior">🌸</div>
-        <div>
-          <div class="plant-name">Hortensia</div>
-          <span class="plant-type-badge badge-exterior">Exterior</span>
-        </div>
+        <div><div class="plant-name">Hortensia</div><span class="plant-type-badge badge-exterior">Exterior</span></div>
       </div>
       <div class="plant-card-body">
         <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Ago–Sep (fin de invierno). Solo ramas muertas o muy viejas. Nunca podar en otoño (Mar–May) — perderías las flores.</span></div>
-        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Dic–Mar (verano–otoño). Corta flores marchitas a fines de verano (Feb). Deja las últimas como protección invernal.</span></div>
+        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Dic–Mar. Corta flores marchitas a fines de verano (Feb). Deja las últimas como protección invernal.</span></div>
         <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Abril (otoño) o septiembre (primavera temprana). Evita el verano.</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Semisombra. Proteger del sol intenso de mediodía en verano chileno (Dic–Feb).</span></div>
-        <div class="note-box">💡 En Chillán los veranos son secos y calurosos — la hortensia necesitará riego abundante en Dic, Ene y Feb. El color azul/rosa depende del pH del suelo.</div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Semisombra. Proteger del sol intenso de mediodía en verano (Dic–Feb).</span></div>
+        <div class="note-box">💡 El color azul/rosa depende del pH del suelo. En Chillán el verano seco exige riego casi diario.</div>
       </div>
     </div>
 
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon exterior">💜</div>
-        <div>
-          <div class="plant-name">Lavanda</div>
-          <span class="plant-type-badge badge-exterior">Exterior</span>
-        </div>
+        <div><div class="plant-name">Lavanda</div><span class="plant-type-badge badge-exterior">Exterior</span></div>
       </div>
       <div class="plant-card-body">
         <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">2 veces: Sep–Oct (primavera, corta 1/3 del follaje verde) + Feb–Mar (post-floración, tallos gastados).</span></div>
         <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Nov–Ene. Corta antes de que abran del todo para mejor aroma y para secar.</span></div>
         <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Octubre (primavera). Odia el trasplante frecuente.</span></div>
         <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Pleno sol, suelo muy bien drenado. El clima de Chillán le viene perfecto — ama el verano seco.</span></div>
-        <div class="note-box">💡 NUNCA cortes la madera lignificada (café, dura) — no rebrota. Solo poda la parte verde. La lavanda ama el calor seco de Chillán en verano.</div>
+        <div class="note-box">💡 NUNCA cortes la madera lignificada (café, dura) — no rebrota. Solo poda la parte verde.</div>
       </div>
     </div>
 
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon exterior">🌼</div>
-        <div>
-          <div class="plant-name">Agapanto</div>
-          <span class="plant-type-badge badge-exterior">Exterior</span>
-        </div>
+        <div><div class="plant-name">Agapanto</div><span class="plant-type-badge badge-exterior">Exterior</span></div>
       </div>
       <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Mar–Abr (otoño chileno): corta tallos florales agotados. Deja el follaje hasta invierno.</span></div>
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Mar–Abr (otoño): corta tallos florales agotados. Deja el follaje hasta invierno.</span></div>
         <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Dic–Feb (pleno verano). Retira cabezas florales marchitas para alargar la floración.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 3–4 años en septiembre u octubre. Florece mejor cuando está algo apretado.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 3–4 años en sep–oct. Florece mejor cuando está algo apretado en la maceta.</span></div>
         <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Pleno sol o semisombra. Muy resistente al calor seco de Chillán.</span></div>
-        <div class="note-box">💡 ¡Le gusta estar apretado en la maceta! No trasplantes salvo necesidad — produce más flores así.</div>
+        <div class="note-box">💡 ¡Le gusta estar apretado! No trasplantes salvo necesidad — produce más flores así.</div>
       </div>
     </div>
 
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon exterior">🌹</div>
-        <div>
-          <div class="plant-name">Bailarina</div>
-          <span class="plant-type-badge badge-exterior">Exterior · Rosa miniatura</span>
-        </div>
+        <div><div class="plant-name">Bailarina</div><span class="plant-type-badge badge-exterior">Exterior · Rosa miniatura</span></div>
       </div>
       <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Ago–Sep (fin de invierno, antes de primavera). Poda de forma: elimina ramas cruzadas, débiles y secas.</span></div>
-        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Oct–Abr (primavera y verano). Deadheading continuo durante toda la temporada florida.</span></div>
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Ago–Sep (fin de invierno). Poda de forma: elimina ramas cruzadas, débiles y secas.</span></div>
+        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Oct–Abr. Deadheading continuo durante toda la temporada florida.</span></div>
         <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Abril–Mayo (otoño) o agosto–septiembre (fin de invierno).</span></div>
-        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Mínimo 6h de sol. Buena ventilación. En verano Chillán puede generar mucho calor — vigila riego.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Mínimo 6h de sol. Buena ventilación para evitar hongos.</span></div>
         <div class="note-box">💡 En junio–julio aplica mantillo en la base para proteger raíces del frío invernal de Chillán.</div>
       </div>
     </div>
@@ -650,35 +490,30 @@
     <div class="plant-card">
       <div class="plant-card-header">
         <div class="plant-icon exterior">🌷</div>
-        <div>
-          <div class="plant-name">Tulipán</div>
-          <span class="plant-type-badge badge-exterior">Exterior · Bulbo</span>
-        </div>
+        <div><div class="plant-name">Tulipán</div><span class="plant-type-badge badge-exterior">Exterior · Bulbo</span></div>
       </div>
       <div class="plant-card-body">
-        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Corta el tallo floral marchito (Oct–Nov). NUNCA cortes las hojas hasta que amarilleen solas — nutren el bulbo.</span></div>
-        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Sep–Oct (primavera chilena). Disfrútalas — son breves pero espectaculares.</span></div>
-        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Bulbos</span><span class="care-value">Planta en Abr–May (otoño) a 15–20cm de profundidad. Extrae bulbos en Dic–Ene para guardarlos.</span></div>
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Corta el tallo floral marchito (Oct–Nov). NUNCA cortes las hojas hasta que amarilleen — nutren el bulbo.</span></div>
+        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Sep–Oct (primavera chilena). Breves pero espectaculares.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Bulbos</span><span class="care-value">Planta en Abr–May (otoño) a 15–20 cm. Extrae bulbos en Dic–Ene para guardarlos.</span></div>
         <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Pleno sol. Suelo bien drenado. Necesita frío invernal (Jun–Ago en Chillán) para florecer.</span></div>
-        <div class="note-box">💡 Chillán tiene inviernos fríos que los tulipanes agradecen. Si la temporada es muy suave, guarda los bulbos en el cajón de verduras de la nevera (4–7°C) por 6–8 semanas antes de plantar.</div>
+        <div class="note-box">💡 Si el invierno fue muy suave, refrigera los bulbos a 4–7°C por 6–8 semanas antes de plantar.</div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ── CALENDARIO ── -->
+<!-- ══ CALENDARIO ══ -->
 <section id="calendario" class="section">
   <h2 class="section-title">Calendario Anual</h2>
   <p class="section-subtitle">Adaptado al hemisferio sur — Chillán, Región de Ñuble</p>
-
   <div class="season-strip">
     <div class="season-pill sp-verano">☀️ Verano: Dic–Feb</div>
     <div class="season-pill sp-otono">🍂 Otoño: Mar–May</div>
     <div class="season-pill sp-invierno">❄️ Invierno: Jun–Ago</div>
     <div class="season-pill sp-primavera">🌸 Primavera: Sep–Nov</div>
   </div>
-
   <div class="legend">
     <div class="legend-item"><div class="legend-dot dot-prune"></div> Poda</div>
     <div class="legend-item"><div class="legend-dot dot-flowers"></div> Flores</div>
@@ -687,781 +522,697 @@
     <div class="legend-item"><div class="legend-dot dot-water"></div> Riego especial</div>
     <div class="legend-item"><div class="legend-dot dot-general"></div> Cuidado general</div>
   </div>
-
   <div class="calendar-grid" id="calendarGrid"></div>
 </section>
 
-<!-- ── RIEGO ── -->
+<!-- ══ RIEGO ══ -->
 <section id="riego" class="section">
   <h2 class="section-title">Guía de Riego</h2>
-  <p class="section-subtitle">Frecuencias para el clima mediterráneo de Chillán (veranos secos y calurosos)</p>
-
+  <p class="section-subtitle">Frecuencias para el clima mediterráneo de Chillán</p>
   <table class="watering-table">
-    <thead>
-      <tr>
-        <th>Planta</th>
-        <th>Verano (Dic–Feb)</th>
-        <th>Invierno (Jun–Ago)</th>
-        <th>Consejo clave para Chillán</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Planta</th><th>Verano (Dic–Feb)</th><th>Invierno (Jun–Ago)</th><th>Consejo clave para Chillán</th></tr></thead>
     <tbody>
-      <tr>
-        <td><strong>🌿 Monstera</strong></td>
-        <td><span class="freq-badge">Cada 7 días</span></td>
-        <td><span class="freq-badge winter">Cada 14–21 días</span></td>
-        <td>En el verano seco de Chillán puede necesitar más frecuencia. Toca el sustrato antes de regar.</td>
-      </tr>
-      <tr>
-        <td><strong>🍃 Philodendron Brasil</strong> ×2</td>
-        <td><span class="freq-badge">Cada 7–10 días</span></td>
-        <td><span class="freq-badge winter">Cada 14 días</span></td>
-        <td>Deja secar los 3–4 cm superiores entre riegos. Más tolerante a la sequía que a encharcarse.</td>
-      </tr>
-      <tr>
-        <td><strong>🌿 Golden Pothos</strong> ×2</td>
-        <td><span class="freq-badge">Cada 7–10 días</span></td>
-        <td><span class="freq-badge winter">Cada 14 días</span></td>
-        <td>Avisa cuando necesita agua colgando levemente las hojas. Muy tolerante — de las más fáciles de interior.</td>
-      </tr>
-      <tr>
-        <td><strong>🌴 Dracena Marginata</strong></td>
-        <td><span class="freq-badge">Cada 10–14 días</span></td>
-        <td><span class="freq-badge winter">Cada 21–30 días</span></td>
-        <td>Prefiere quedarse algo seca. Usa agua reposada 24h — el flúor del agua de red le mancha las hojas.</td>
-      </tr>
-      <tr>
-        <td><strong>🌵 Lengua de Suegra</strong></td>
-        <td><span class="freq-badge">Cada 21–28 días</span></td>
-        <td><span class="freq-badge winter">Cada 45–60 días</span></td>
-        <td>Las primeras 3–4 semanas post-plantación NO regar. Después, es la planta más resistente a la sequía que tienes.</td>
-      </tr>
-      <tr>
-        <td><strong>🌸 Orquídea Phalaenopsis</strong></td>
-        <td><span class="freq-badge">Cada 10–14 días</span></td>
-        <td><span class="freq-badge winter">Cada 14–21 días</span></td>
-        <td>Sumerge la maceta 10 min en agua y escurre bien. Con musgo: riega cuando esté casi seco al tacto. Raíces grises = necesita agua.</td>
-      </tr>
-      <tr>
-        <td><strong>🌴 Chamaedorea elegans</strong></td>
-        <td><span class="freq-badge">Cada 7–10 días</span></td>
-        <td><span class="freq-badge winter">Cada 14–18 días</span></td>
-        <td>Sustrato levemente húmedo siempre — ni seco ni encharcado. En invierno con calefacción, pulveriza las frondas 2–3 veces por semana.</td>
-      </tr>
-      <tr>
-        <td><strong>🌿 Ruda</strong></td>
-        <td><span class="freq-badge">Cada 10–14 días</span></td>
-        <td><span class="freq-badge winter">Casi nada (lluvia basta)</span></td>
-        <td>Muy resistente a la sequía. En invierno lluvioso de Chillán no necesita riego extra. Odia el exceso de agua.</td>
-      </tr>
-      <tr>
-        <td><strong>🌸 Hortensia</strong></td>
-        <td><span class="freq-badge hot">Diario o día por medio</span></td>
-        <td><span class="freq-badge winter">1 vez/semana</span></td>
-        <td>¡Crítico en Dic–Feb! El calor seco de Chillán la deshidrata rápido. Mulching en la base ayuda mucho.</td>
-      </tr>
-      <tr>
-        <td><strong>💜 Lavanda</strong></td>
-        <td><span class="freq-badge">Cada 10–14 días</span></td>
-        <td><span class="freq-badge winter">Casi nada (lluvia basta)</span></td>
-        <td>El clima de Chillán es ideal para ella — ama el verano seco. No riegues si hay lluvia en invierno.</td>
-      </tr>
-      <tr>
-        <td><strong>🌼 Agapanto</strong></td>
-        <td><span class="freq-badge hot">Cada 5–7 días</span></td>
-        <td><span class="freq-badge winter">Cada 3–4 semanas</span></td>
-        <td>Florece en verano, así que necesita agua regular en Dic–Feb. Tolera bien la sequía.</td>
-      </tr>
-      <tr>
-        <td><strong>🌹 Bailarina</strong></td>
-        <td><span class="freq-badge hot">Cada 2–3 días</span></td>
-        <td><span class="freq-badge winter">Cada 7–10 días</span></td>
-        <td>Riega siempre en la base. Nunca mojes las hojas (hongos). En verano, riega de mañana temprano.</td>
-      </tr>
-      <tr>
-        <td><strong>🌷 Tulipán</strong></td>
-        <td><span class="freq-badge">Bulbo guardado — no regar</span></td>
-        <td><span class="freq-badge winter">Al plantar en otoño</span></td>
-        <td>Planta en Abr–May con buen riego inicial. Luego las lluvias invernales de Chillán hacen el trabajo.</td>
-      </tr>
+      <tr><td><strong>🌿 Monstera</strong></td><td><span class="freq-badge">Cada 7 días</span></td><td><span class="freq-badge winter">Cada 14–21 días</span></td><td>En el verano seco puede necesitar más frecuencia. Toca el sustrato antes de regar.</td></tr>
+      <tr><td><strong>🍃 Philodendron Brasil</strong> ×2</td><td><span class="freq-badge">Cada 7–10 días</span></td><td><span class="freq-badge winter">Cada 14 días</span></td><td>Deja secar los 3–4 cm superiores entre riegos. Más tolerante a la sequía que al encharcamiento.</td></tr>
+      <tr><td><strong>🌿 Golden Pothos</strong> ×2</td><td><span class="freq-badge">Cada 7–10 días</span></td><td><span class="freq-badge winter">Cada 14 días</span></td><td>Avisa cuando necesita agua colgando levemente las hojas. Muy tolerante.</td></tr>
+      <tr><td><strong>🌴 Dracena Marginata</strong></td><td><span class="freq-badge">Cada 10–14 días</span></td><td><span class="freq-badge winter">Cada 21–30 días</span></td><td>Prefiere quedarse algo seca. Usa agua reposada 24h — el flúor le mancha las hojas.</td></tr>
+      <tr><td><strong>🌿 Chamaedorea</strong></td><td><span class="freq-badge">Cada 7–9 días</span></td><td><span class="freq-badge winter">Cada 14–18 días</span></td><td>Usa agua reposada 24h — también sensible al flúor. Espera que el tercio superior del sustrato seque entre riegos.</td></tr>
+      <tr><td><strong>🌸 Hortensia</strong></td><td><span class="freq-badge hot">Diario o día por medio</span></td><td><span class="freq-badge winter">1 vez/semana</span></td><td>¡Crítico en Dic–Feb! El calor seco de Chillán la deshidrata rápido. Mulching en la base ayuda.</td></tr>
+      <tr><td><strong>💜 Lavanda</strong></td><td><span class="freq-badge">Cada 10–14 días</span></td><td><span class="freq-badge winter">Casi nada (lluvia basta)</span></td><td>Ama el verano seco de Chillán. No riegues si hay lluvia en invierno.</td></tr>
+      <tr><td><strong>🌼 Agapanto</strong></td><td><span class="freq-badge hot">Cada 5–7 días</span></td><td><span class="freq-badge winter">Cada 3–4 semanas</span></td><td>Florece en verano, necesita agua regular en Dic–Feb. Tolera bien la sequía.</td></tr>
+      <tr><td><strong>🌹 Bailarina</strong></td><td><span class="freq-badge hot">Cada 2–3 días</span></td><td><span class="freq-badge winter">Cada 7–10 días</span></td><td>Riega en la base. Nunca mojes las hojas (hongos). En verano, riega de mañana.</td></tr>
+      <tr><td><strong>🌷 Tulipán</strong></td><td><span class="freq-badge">Bulbo guardado — no regar</span></td><td><span class="freq-badge winter">Al plantar en otoño</span></td><td>Planta en Abr–May con buen riego inicial. Las lluvias invernales hacen el resto.</td></tr>
     </tbody>
   </table>
-
   <div class="tips-grid">
-    <div class="tip-card">
-      <div class="tip-emoji">⏰</div>
-      <div class="tip-content">
-        <h4>Mejor hora para regar</h4>
-        <p>En Chillán, en verano riega muy temprano (7–9 AM) antes del calor. El agua tiene tiempo de absorberse antes de evaporarse.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🌧️</div>
-      <div class="tip-content">
-        <h4>Inviernos lluviosos</h4>
-        <p>En Chillán llueve bastante en junio, julio y agosto. Ajusta el riego a la lluvia natural — muchas plantas de exterior no necesitan riego adicional.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🍂</div>
-      <div class="tip-content">
-        <h4>Mulching en verano</h4>
-        <p>Cubre la base de las plantas con corteza o compost (3–5 cm). Retiene la humedad en los veranos secos y calurosos de Chillán.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">👆</div>
-      <div class="tip-content">
-        <h4>El test del dedo</h4>
-        <p>Introduce el dedo 3–4 cm en el sustrato. Si está húmedo, espera. Si está seco, riega. Funciona para todas las plantas de interior.</p>
-      </div>
-    </div>
+    <div class="tip-card"><div class="tip-emoji">⏰</div><div class="tip-content"><h4>Mejor hora para regar</h4><p>En verano riega muy temprano (7–9 AM) antes del calor. El agua se absorbe antes de evaporarse.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌧️</div><div class="tip-content"><h4>Inviernos lluviosos</h4><p>En Chillán llueve bastante en jun–ago. Ajusta el riego a la lluvia natural — las plantas de exterior generalmente no necesitan riego adicional.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🍂</div><div class="tip-content"><h4>Mulching en verano</h4><p>Cubre la base con corteza o compost (3–5 cm). Retiene la humedad en los veranos secos y calurosos.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">👆</div><div class="tip-content"><h4>El test del dedo</h4><p>Introduce el dedo 3–4 cm en el sustrato. Si está húmedo, espera. Si está seco, riega.</p></div></div>
   </div>
 </section>
 
-<!-- ── CONSEJOS ── -->
+<!-- ══ CONSEJOS ══ -->
 <section id="consejos" class="section">
   <h2 class="section-title">Consejos de Temporada</h2>
   <p class="section-subtitle">Cuidados estacionales para el clima mediterráneo de Chillán</p>
-
   <div class="tips-grid">
-    <div class="tip-card">
-      <div class="tip-emoji">☀️</div>
-      <div class="tip-content">
-        <h4>Verano Chillán (Dic–Feb)</h4>
-        <p>La temporada más demandante. Riego abundante para Hortensia y Bailarina. Disfruta la floración de Lavanda, Agapanto y Bailarina. Protege de la siesta: sombra a mediodía para las más delicadas.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🍂</div>
-      <div class="tip-content">
-        <h4>Otoño Chillán (Mar–May)</h4>
-        <p>Planta los bulbos de Tulipán en abril–mayo. Poda post-floración de Lavanda y Agapanto. Reduce riego y fertilización. Prepara las plantas para el descanso.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">❄️</div>
-      <div class="tip-content">
-        <h4>Invierno Chillán (Jun–Ago)</h4>
-        <p>Chillán puede bajar a 4°C — protege las macetas más sensibles. Riego mínimo (la lluvia ayuda). No fertilices. Aplica mantillo en la base de Bailarina y Hortensia.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🌸</div>
-      <div class="tip-content">
-        <h4>Primavera Chillán (Sep–Nov)</h4>
-        <p>¡Acción! Poda de forma en agosto–septiembre. Trasplante de Monstera, Potus, separación de la planta hija. Comienza a fertilizar. Los tulipanes florecen en octubre.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🌿</div>
-      <div class="tip-content">
-        <h4>Separar la Monstera hija</h4>
-        <p>Hazlo en septiembre–octubre. Espera que tenga 2–3 hojas propias y raíces visibles. Corta con tijeras esterilizadas. Plántala en sustrato fresco con buen drenaje.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🐛</div>
-      <div class="tip-content">
-        <h4>Plagas comunes</h4>
-        <p>Revisa el envés de las hojas cada semana. Cochinilla (algodón blanco), araña roja (aparece en verano seco — muy común en Chillán), pulgón en exterior. Trata con jabón potásico o aceite de neem.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🧴</div>
-      <div class="tip-content">
-        <h4>Fertilización</h4>
-        <p>Solo en época de crecimiento (Sep–Mar en Chile). Interior: abono líquido cada 15–20 días. Exterior con flores: abono rico en fósforo (P) y potasio (K) para potenciar la floración.</p>
-      </div>
-    </div>
-    <div class="tip-card">
-      <div class="tip-emoji">🌷</div>
-      <div class="tip-content">
-        <h4>Bulbos de Tulipán en Chillán</h4>
-        <p>Chillán tiene inviernos suficientemente fríos para los tulipanes. Planta en abril–mayo a 15–20 cm. Si el invierno fue suave, refrigera los bulbos 6 semanas antes de plantar el siguiente año.</p>
-      </div>
-    </div>
+    <div class="tip-card"><div class="tip-emoji">☀️</div><div class="tip-content"><h4>Verano Chillán (Dic–Feb)</h4><p>La temporada más demandante. Riego abundante para Hortensia y Bailarina. Disfruta la floración de Lavanda y Agapanto. Protege con sombra a mediodía las más delicadas.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🍂</div><div class="tip-content"><h4>Otoño Chillán (Mar–May)</h4><p>Planta los bulbos de Tulipán en abr–may. Poda post-floración de Lavanda y Agapanto. Reduce riego y fertilización. Prepara las plantas para el descanso.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">❄️</div><div class="tip-content"><h4>Invierno Chillán (Jun–Ago)</h4><p>Chillán puede bajar a 4°C — protege las macetas más sensibles. Riego mínimo (la lluvia ayuda). No fertilices. Aplica mantillo en la base de Bailarina y Hortensia.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌸</div><div class="tip-content"><h4>Primavera Chillán (Sep–Nov)</h4><p>¡Acción! Poda de forma en ago–sep. Trasplante de Monstera y separación de planta hija. Comienza a fertilizar. Los tulipanes florecen en octubre.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Separar la Monstera hija</h4><p>Hazlo en sep–oct. Espera que tenga 2–3 hojas propias y raíces visibles. Corta con tijeras esterilizadas y plántala en sustrato fresco con buen drenaje.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🐛</div><div class="tip-content"><h4>Plagas comunes</h4><p>Revisa el envés de las hojas cada semana. Cochinilla (algodón blanco), araña roja (verano seco — muy común en Chillán), pulgón en exterior. Trata con jabón potásico o aceite de neem.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🧴</div><div class="tip-content"><h4>Fertilización</h4><p>Solo en época de crecimiento (Sep–Mar en Chile). Interior: abono líquido cada 15–20 días. Exterior con flores: abono rico en fósforo (P) y potasio (K).</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌷</div><div class="tip-content"><h4>Bulbos de Tulipán</h4><p>Chillán tiene inviernos suficientemente fríos. Planta en abr–may a 15–20 cm. Si el invierno fue suave, refrigera los bulbos 6 semanas antes de plantar el siguiente año.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Chamaedorea — Poda y limpieza</h4><p>No requiere poda de forma. Retira solo las frondas completamente amarillas o marrones cortando desde la base del tallo. Hazlo en cualquier época del año. Nunca cortes frondas verdes — son permanentes.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Chamaedorea — Trasplante</h4><p>Cada 2–3 años en sep–oct (primavera). Solo cuando las raíces asomen por el drenaje. Elige una maceta solo 3–4 cm más grande — le gusta estar algo apretada. Sustrato con buen drenaje.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Chamaedorea — Verano en Chillán</h4><p>En dic–feb el calor seco activa la araña roja. Revisa el envés de las frondas semanalmente. Rocía con agua las frondas 1–2 veces por semana para mantener humedad. Usa agua reposada 24h.</p></div></div>
   </div>
 </section>
 
-<!-- ── RIEGO 2026 ── -->
-<section id="riego2026" class="section">
-  <h2 class="section-title">Calendario de Riego 2026</h2>
-  <p class="section-subtitle">Días recomendados de riego para cada planta — Chillán, hemisferio sur</p>
-
-  <div class="chillan-note">
-    <div class="cn-icon">💧</div>
-    <div>
-      <strong>Guía de uso:</strong> Los días marcados son recomendaciones basadas en las frecuencias ideales para el clima de Chillán. <strong>Siempre haz el test del dedo</strong> antes de regar — si el sustrato aún está húmedo, espera un día más. En invierno lluvioso (Jun–Ago) puedes saltarte riegos de exterior.
+<!-- ══ DIARIO ══ -->
+<section id="diario" class="section">
+  <h2 class="section-title">Diario de Cuidados</h2>
+  <p class="section-subtitle">Registra tus observaciones y actividades</p>
+  <div class="journal-area">
+    <h3>Nueva entrada</h3>
+    <div class="journal-form">
+      <div class="form-row">
+        <div class="form-group"><label>Fecha</label><input type="date" id="entryDate"></div>
+        <div class="form-group">
+          <label>Planta</label>
+          <select id="entryPlant">
+            <option value="">Selecciona...</option>
+            <option>🌿 Monstera</option>
+            <option>🍃 Philodendron Brasil (1)</option>
+            <option>🍃 Philodendron Brasil (2)</option>
+            <option>🌿 Golden Pothos (1)</option>
+            <option>🌿 Golden Pothos (2)</option>
+            <option>🌴 Dracena Marginata</option>
+            <option>🌿 Chamaedorea</option>
+            <option>🌸 Hortensia</option>
+            <option>💜 Lavanda</option>
+            <option>🌼 Agapanto</option>
+            <option>🌹 Bailarina</option>
+            <option>🌷 Tulipán</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Acción realizada</label>
+        <select id="entryAction">
+          <option value="">Selecciona...</option>
+          <option>💧 Riego</option>
+          <option>✂️ Poda</option>
+          <option>🪴 Trasplante</option>
+          <option>🌺 Corte de flores</option>
+          <option>🧴 Fertilización</option>
+          <option>🐛 Tratamiento de plagas</option>
+          <option>🌱 Separación planta hija (Monstera)</option>
+          <option>🌿 Limpieza de hojas</option>
+          <option>🌷 Siembra/extracción de bulbo</option>
+          <option>📝 Observación</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Notas</label><textarea id="entryNote" placeholder="¿Qué observaste? ¿Cómo está la planta?..."></textarea></div>
+      <button class="btn-save" onclick="saveEntry()">Guardar entrada</button>
     </div>
   </div>
+  <div id="entriesList"></div>
+</section>
 
-  <div id="plantFilterBar" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;"></div>
-
+<!-- ══ RIEGO 2026 ══ -->
+<section id="riego2026" class="section">
+  <h2 class="section-title">Calendario de Riego 2026</h2>
+  <p class="section-subtitle">Días recomendados de riego — toca cualquier día para ver el detalle o registrar lluvia</p>
+  <div class="chillan-note">
+    <div class="cn-icon">💧</div>
+    <div><strong>Guía de uso:</strong> Días en azul = riego programado. Toca cualquier día para ver qué plantas regar o para registrar lluvia. La lluvia recalcula automáticamente todos los riegos de exterior. <strong>Siempre haz el test del dedo</strong> antes de regar.</div>
+  </div>
+  <div class="data-toolbar">
+    <div class="data-toolbar-label">💾 Mis datos</div>
+    <button class="btn-export" onclick="exportData()">⬇️ Exportar datos</button>
+    <label class="btn-import-label">⬆️ Importar datos<input type="file" accept=".json" onchange="importData(event)" style="display:none"></label>
+    <span id="dataStatus"></span>
+  </div>
+  <div id="plantFilterBar" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;"></div>
   <div id="cal2026"></div>
 </section>
 
 </main>
 
+<div id="installBanner">
+  <p>📲 Instala esta app para usarla sin internet</p>
+  <button class="btn-install" id="btnInstall">Instalar</button>
+  <button class="btn-dismiss" onclick="document.getElementById('installBanner').style.display='none'">✕</button>
+</div>
+
 <script>
-  function showSection(id, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
+// ── TABS ──
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── SEASON CALENDAR ──
+const calendarData = [
+  { month:'Enero',      season:'verano',    tasks:[
+    {dot:'dot-water',   text:'Hortensia: riego diario por calor seco'},
+    {dot:'dot-flowers', text:'Agapanto y Lavanda en plena floración'},
+    {dot:'dot-flowers', text:'Bailarina: deadheading continuo'},
+    {dot:'dot-general', text:'Araña roja activa — revisa envés de frondas Chamaedorea'},
+  ]},
+  { month:'Febrero',    season:'verano',    tasks:[
+    {dot:'dot-flowers', text:'Corta flores marchitas de Hortensia'},
+    {dot:'dot-flowers', text:'Agapanto: fin de floración'},
+    {dot:'dot-prune',   text:'Post-poda Lavanda (tallos gastados)'},
+    {dot:'dot-general', text:'Chamaedorea: limpia frondas y rocía — calor seco'},
+  ]},
+  { month:'Marzo',      season:'otono',     tasks:[
+    {dot:'dot-prune',   text:'Corta tallos de Agapanto agotados'},
+    {dot:'dot-general', text:'Reduce fertilización gradualmente'},
+    {dot:'dot-water',   text:'Reduce riego al bajar temperatura'},
+    {dot:'dot-prune',   text:'Chamaedorea: retira frondas amarillas de la base'},
+  ]},
+  { month:'Abril',      season:'otono',     tasks:[
+    {dot:'dot-transplant', text:'🌷 Planta bulbos de Tulipán (15–20 cm)'},
+    {dot:'dot-transplant', text:'Trasplante Hortensia si necesita'},
+    {dot:'dot-general', text:'Aplica mantillo en base de Bailarina'},
+    {dot:'dot-water',   text:'Riego muy reducido en exterior'},
+  ]},
+  { month:'Mayo',       season:'otono',     tasks:[
+    {dot:'dot-transplant', text:'Última oportunidad trasplante Bailarina'},
+    {dot:'dot-general', text:'Protege macetas pequeñas del frío'},
+    {dot:'dot-water',   text:'Lluvias invernales comienzan — ajusta riego'},
+    {dot:'dot-general', text:'Aleja Chamaedorea de ventanas — mínimo 10°C'},
+  ]},
+  { month:'Junio',      season:'invierno',  tasks:[
+    {dot:'dot-general', text:'Descanso completo plantas exterior'},
+    {dot:'dot-water',   text:'Riego mínimo (la lluvia es suficiente)'},
+    {dot:'dot-general', text:'Mantillo en base de Hortensia y Bailarina'},
+    {dot:'dot-general', text:'Chamaedorea: riego cada 18 días, nada de fertilización'},
+  ]},
+  { month:'Julio',      season:'invierno',  tasks:[
+    {dot:'dot-general', text:'Frío máximo en Chillán — protege macetas'},
+    {dot:'dot-general', text:'No podar, no fertilizar, no trasplantar'},
+    {dot:'dot-water',   text:'Solo regar si no ha llovido en 10+ días'},
+    {dot:'dot-general', text:'Bulbos de Tulipán recibiendo el frío ✓'},
+  ]},
+  { month:'Agosto',     season:'invierno',  tasks:[
+    {dot:'dot-prune',   text:'Fin de invierno: poda Monstera (interior)'},
+    {dot:'dot-prune',   text:'Poda Bailarina (forma y ramas muertas)'},
+    {dot:'dot-prune',   text:'Poda leve Hortensia (solo ramas secas)'},
+    {dot:'dot-general', text:'Prepara sustrato y revisa si Chamaedorea necesita trasplante'},
+  ]},
+  { month:'Septiembre', season:'primavera', tasks:[
+    {dot:'dot-transplant', text:'Trasplante Monstera — separa planta hija'},
+    {dot:'dot-transplant', text:'Trasplante Philodendron / Dracena / Chamaedorea si necesitan'},
+    {dot:'dot-prune',   text:'Poda Lavanda (1/3 del follaje verde)'},
+    {dot:'dot-fertilize',text:'Comienza a fertilizar (interior y exterior)'},
+  ]},
+  { month:'Octubre',    season:'primavera', tasks:[
+    {dot:'dot-flowers', text:'🌷 Tulipanes florecen — ¡disfrútalos!'},
+    {dot:'dot-transplant', text:'Trasplante Lavanda si es necesario'},
+    {dot:'dot-flowers', text:'Bailarina: primeros brotes florales'},
+    {dot:'dot-fertilize',text:'Chamaedorea: fertiliza cada 20 días hasta marzo'},
+  ]},
+  { month:'Noviembre',  season:'primavera', tasks:[
+    {dot:'dot-flowers', text:'Corta tallo tulipán al marchitar (deja hojas)'},
+    {dot:'dot-flowers', text:'Lavanda: inicio floración — corta para secar'},
+    {dot:'dot-flowers', text:'Deadheading en Bailarina (todo el mes)'},
+    {dot:'dot-fertilize',text:'Fertiliza interior (Monstera, Philodendron, Chamaedorea) cada 15 días'},
+  ]},
+  { month:'Diciembre',  season:'verano',    tasks:[
+    {dot:'dot-flowers', text:'Hortensia en floración — ¡máximo riego!'},
+    {dot:'dot-flowers', text:'Agapanto comienza a florecer'},
+    {dot:'dot-transplant', text:'Extrae bulbos tulipán para guardar'},
+    {dot:'dot-general', text:'Chamaedorea: revisa araña roja, rocía frondas con agua'},
+  ]},
+];
+
+function buildCalendar() {
+  const grid = document.getElementById('calendarGrid');
+  calendarData.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'month-card';
+    const tasks = m.tasks.map(t => `<div class="task-item"><div class="task-dot ${t.dot}"></div>${t.text}</div>`).join('');
+    const labels = {verano:'Verano en Chillán', otono:'Otoño en Chillán', invierno:'Invierno en Chillán', primavera:'Primavera en Chillán'};
+    card.innerHTML = `<div class="month-header ${m.season}">${m.month}<span>📍 ${labels[m.season]}</span></div><div class="month-tasks">${tasks}</div>`;
+    grid.appendChild(card);
+  });
+}
+buildCalendar();
+
+// ── JOURNAL ──
+let entries = JSON.parse(localStorage.getItem('plantEntries_chillan') || '[]');
+
+function saveEntry() {
+  const date = document.getElementById('entryDate').value;
+  const plant = document.getElementById('entryPlant').value;
+  const action = document.getElementById('entryAction').value;
+  const note = document.getElementById('entryNote').value.trim();
+  if (!date || !plant || !action) { alert('Completa la fecha, planta y acción.'); return; }
+  entries.unshift({ id: Date.now(), date, plant, action, note });
+  localStorage.setItem('plantEntries_chillan', JSON.stringify(entries));
+  renderEntries();
+  document.getElementById('entryDate').value = '';
+  document.getElementById('entryPlant').value = '';
+  document.getElementById('entryAction').value = '';
+  document.getElementById('entryNote').value = '';
+}
+
+function deleteEntry(id) {
+  entries = entries.filter(e => e.id !== id);
+  localStorage.setItem('plantEntries_chillan', JSON.stringify(entries));
+  renderEntries();
+}
+
+function renderEntries() {
+  const c = document.getElementById('entriesList');
+  if (!entries.length) { c.innerHTML = '<div class="empty-state">🌱 Aún no hay entradas. ¡Comienza a registrar!</div>'; return; }
+  c.innerHTML = '<div class="entries-list">' + entries.map(e => `
+    <div class="entry-item">
+      <div class="entry-header">
+        <div class="entry-plant">${e.plant}</div>
+        <div class="entry-date">${new Date(e.date+'T12:00:00').toLocaleDateString('es-CL',{day:'2-digit',month:'long',year:'numeric'})}</div>
+      </div>
+      <div class="entry-action">${e.action}</div>
+      ${e.note ? `<div class="entry-note">${e.note}</div>` : ''}
+      <button class="entry-delete" onclick="deleteEntry(${e.id})">✕</button>
+    </div>`).join('') + '</div>';
+}
+
+document.getElementById('entryDate').value = new Date().toISOString().split('T')[0];
+renderEntries();
+
+// ── RIEGO 2026 ──
+const PLANTS = [
+  {id:'monstera',     name:'🌿 Monstera',           color:'#4a9e5c', exterior:false, intervals:{0:7,1:7,2:10,3:10,4:10,5:18,6:18,7:18,8:8,9:8,10:8,11:7}},
+  {id:'philodendron', name:'🍃 Philodendron Brasil', color:'#2e7d32', exterior:false, intervals:{0:8,1:8,2:10,3:10,4:12,5:16,6:16,7:16,8:9,9:9,10:9,11:8}},
+  {id:'pothos',       name:'🌿 Golden Pothos',       color:'#7cb342', exterior:false, intervals:{0:8,1:8,2:10,3:10,4:12,5:16,6:16,7:16,8:9,9:9,10:9,11:8}},
+  {id:'dracena',      name:'🌴 Dracena Marginata',   color:'#a0522d', exterior:false, intervals:{0:12,1:12,2:14,3:16,4:18,5:26,6:26,7:26,8:14,9:14,10:14,11:12}},
+  {id:'chamaedorea',  name:'🌿 Chamaedorea',         color:'#6d9e3a', exterior:false, intervals:{0:8,1:8,2:11,3:12,4:14,5:18,6:18,7:18,8:10,9:9,10:9,11:8}},
+  {id:'hortensia',    name:'🌸 Hortensia',           color:'#e91e8c', exterior:true,  intervals:{0:1,1:1,2:3,3:5,4:7,5:10,6:10,7:10,8:5,9:4,10:3,11:1}},
+  {id:'lavanda',      name:'💜 Lavanda',             color:'#7b5ea7', exterior:true,  intervals:{0:12,1:12,2:14,3:16,4:20,5:0,6:0,7:0,8:14,9:12,10:12,11:12}},
+  {id:'agapanto',     name:'🌼 Agapanto',            color:'#1565c0', exterior:true,  intervals:{0:6,1:6,2:9,3:12,4:16,5:28,6:28,7:28,8:10,9:8,10:7,11:6}},
+  {id:'bailarina',    name:'🌹 Bailarina',           color:'#c62828', exterior:true,  intervals:{0:3,1:3,2:4,3:6,4:8,5:10,6:10,7:10,8:4,9:3,10:3,11:3}},
+  {id:'tulipan',      name:'🌷 Tulipán',             color:'#f57f17', exterior:true,  intervals:{0:0,1:0,2:0,3:10,4:10,5:0,6:0,7:0,8:10,9:10,10:0,11:0}},
+];
+
+// All plants start Jan 1st
+const START_IDX = 0;
+
+let rainEvents = JSON.parse(localStorage.getItem('rainEvents_chillan') || '{}');
+function saveRainEvents() { localStorage.setItem('rainEvents_chillan', JSON.stringify(rainEvents)); }
+
+let absenceEvents = JSON.parse(localStorage.getItem('absenceEvents_chillan') || '{}');
+function saveAbsenceEvents() { localStorage.setItem('absenceEvents_chillan', JSON.stringify(absenceEvents)); }
+
+function dateToIdx(key) {
+  const [y,m,d] = key.split('-').map(Number);
+  return Math.round((new Date(y,m-1,d) - new Date(2026,0,1)) / 86400000);
+}
+function idxToKey(idx) {
+  const d = new Date(2026,0,1+idx);
+  return `2026-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function keyToMonth(key) { return parseInt(key.split('-')[1])-1; }
+
+function shiftAbsence(key) {
+  let k = key;
+  let safety = 30;
+  while (absenceEvents[k] && safety-- > 0) {
+    const [y,mo,d] = k.split('-').map(Number);
+    const dt = new Date(y,mo-1,d+1);
+    k = `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
   }
+  return k;
+}
 
-  // Chillán calendar — southern hemisphere
-  const calendarData = [
-    { month: 'Enero', num: '01', season: 'verano', label: 'Verano', tasks: [
-      { dot: 'dot-water', text: 'Hortensia: riego casi diario — pleno verano seco' },
-      { dot: 'dot-flowers', text: 'Agapanto: floración máxima, retira cabezas marchitas' },
-      { dot: 'dot-flowers', text: 'Bailarina: deadheading continuo para prolongar floración' },
-      { dot: 'dot-flowers', text: 'Ruda: floración en curso — corta flores si no quieres semillas' },
-      { dot: 'dot-general', text: 'Chamaedorea: pulveriza frondas 3x/semana por el calor seco' },
-      { dot: 'dot-general', text: 'Araña roja activa — revisa envés de todas las hojas' },
-    ]},
-    { month: 'Febrero', num: '02', season: 'verano', label: 'Verano', tasks: [
-      { dot: 'dot-flowers', text: 'Hortensia: corta flores marchitas, deja las últimas para protección' },
-      { dot: 'dot-prune', text: 'Lavanda: poda post-floración, retira tallos gastados' },
-      { dot: 'dot-prune', text: 'Ruda: poda post-floración, no más del 30% — usa guantes' },
-      { dot: 'dot-flowers', text: 'Agapanto: fin de floración, deja follaje intacto' },
-      { dot: 'dot-general', text: 'Philodendron/Pothos: si aparecen hojas totalmente verdes, córtalas' },
-    ]},
-    { month: 'Marzo', num: '03', season: 'otono', label: 'Otoño', tasks: [
-      { dot: 'dot-prune', text: 'Agapanto: corta tallos florales agotados' },
-      { dot: 'dot-general', text: 'Reduce fertilización en todas las plantas gradualmente' },
-      { dot: 'dot-water', text: 'Reduce riego exterior al bajar la temperatura' },
-      { dot: 'dot-general', text: 'Monstera: limpia las hojas con paño húmedo' },
-      { dot: 'dot-general', text: 'Chamaedorea: reduce fertilización, sigue revisando araña roja' },
-    ]},
-    { month: 'Abril', num: '04', season: 'otono', label: 'Otoño', tasks: [
-      { dot: 'dot-transplant', text: 'Tulipán: planta bulbos a 15–20 cm de profundidad' },
-      { dot: 'dot-transplant', text: 'Hortensia: buen momento para trasplantar si lo necesita' },
-      { dot: 'dot-general', text: 'Aplica mantillo en base de Bailarina y Hortensia' },
-      { dot: 'dot-general', text: 'Dracena: reduce riego, el sustrato puede tardar más en secar' },
-    ]},
-    { month: 'Mayo', num: '05', season: 'otono', label: 'Otoño', tasks: [
-      { dot: 'dot-transplant', text: 'Bailarina: última oportunidad de trasplante antes del invierno' },
-      { dot: 'dot-general', text: 'Interior: aleja las plantas de ventanas con corriente fría' },
-      { dot: 'dot-water', text: 'Lluvias comienzan — ajusta riego exterior a lo que llueva' },
-      { dot: 'dot-general', text: 'Ruda: muy resistente al frío, no requiere protección en Chillán' },
-    ]},
-    { month: 'Junio', num: '06', season: 'invierno', label: 'Invierno', tasks: [
-      { dot: 'dot-general', text: 'Exterior: descanso completo, la lluvia hace el trabajo' },
-      { dot: 'dot-water', text: 'Interior: riego mínimo, cada 14–21 días según planta' },
-      { dot: 'dot-general', text: 'Hortensia/Bailarina: mantillo aplicado protege raíces del frío' },
-      { dot: 'dot-general', text: 'Chamaedorea: con calefacción encendida, humedad ambiental baja — pulveriza' },
-    ]},
-    { month: 'Julio', num: '07', season: 'invierno', label: 'Invierno', tasks: [
-      { dot: 'dot-general', text: 'Frío máximo en Chillán — protege macetas exteriores del hielo' },
-      { dot: 'dot-general', text: 'Dracena y Sansevieria: no bajar de 10–12°C, lejos de ventanas frías' },
-      { dot: 'dot-water', text: 'Sansevieria: puede pasar todo julio sin riego, no te preocupes' },
-      { dot: 'dot-general', text: 'Tulipán: bulbos recibiendo el frío necesario ✓ no intervenir' },
-      { dot: 'dot-general', text: 'Ruda: resistente — no necesita protección, la lluvia la riega' },
-    ]},
-    { month: 'Agosto', num: '08', season: 'invierno', label: 'Invierno', tasks: [
-      { dot: 'dot-prune', text: 'Monstera: poda de limpieza, retira hojas viejas o dañadas' },
-      { dot: 'dot-prune', text: 'Bailarina: poda de forma, elimina ramas cruzadas y secas' },
-      { dot: 'dot-prune', text: 'Hortensia: solo ramas completamente secas o muertas' },
-      { dot: 'dot-flowers', text: 'Orquídea: si terminó la floración, corta vara sobre un nudo' },
-      { dot: 'dot-general', text: 'Prepara sustrato nuevo y herramientas para la primavera' },
-    ]},
-    { month: 'Septiembre', num: '09', season: 'primavera', label: 'Primavera', tasks: [
-      { dot: 'dot-transplant', text: 'Monstera: trasplante y separación de planta hija si está lista' },
-      { dot: 'dot-transplant', text: 'Philodendron / Pothos / Dracena / Chamaedorea: trasplanta si raíces asoman' },
-      { dot: 'dot-transplant', text: 'Orquídea: si no está en flor, reemplaza el musgo por musgo fresco' },
-      { dot: 'dot-prune', text: 'Lavanda y Ruda: poda primaveral (1/3 del follaje). Guantes para la Ruda' },
-      { dot: 'dot-fertilize', text: 'Comienza a fertilizar: interior cada 15 días, exterior quincenal' },
-      { dot: 'dot-fertilize', text: 'Orquídea: inicia fertilización con abono específico para orquídeas' },
-    ]},
-    { month: 'Octubre', num: '10', season: 'primavera', label: 'Primavera', tasks: [
-      { dot: 'dot-flowers', text: 'Tulipán: floración — disfrútalos, son breves' },
-      { dot: 'dot-flowers', text: 'Bailarina: primeros brotes florales, inicia deadheading' },
-      { dot: 'dot-transplant', text: 'Lavanda y Ruda: buen momento para trasplantar si es necesario' },
-      { dot: 'dot-water', text: 'Aumenta riego gradualmente en todas las plantas' },
-    ]},
-    { month: 'Noviembre', num: '11', season: 'primavera', label: 'Primavera', tasks: [
-      { dot: 'dot-flowers', text: 'Tulipán: corta tallo floral al marchitar — NUNCA las hojas aún' },
-      { dot: 'dot-flowers', text: 'Lavanda: corta antes de que abra del todo para mejor aroma' },
-      { dot: 'dot-flowers', text: 'Ruda: inicio de floración — decide si dejas florecer o no' },
-      { dot: 'dot-flowers', text: 'Bailarina: deadheading activo todo el mes' },
-      { dot: 'dot-fertilize', text: 'Fertiliza interior cada 15 días hasta marzo' },
-      { dot: 'dot-general', text: 'Philodendron/Pothos: revisa luz, la variegación debe verse intensa' },
-      { dot: 'dot-general', text: 'Sansevieria: si el brote ya tiene hojas, es buena señal — no toques' },
-    ]},
-    { month: 'Diciembre', num: '12', season: 'verano', label: 'Verano', tasks: [
-      { dot: 'dot-flowers', text: 'Hortensia: floración — riego máximo, no dejar secar' },
-      { dot: 'dot-flowers', text: 'Agapanto: inicio de floración, riega regularmente' },
-      { dot: 'dot-transplant', text: 'Tulipán: extrae bulbos cuando hojas amarilleen, guarda en lugar fresco' },
-      { dot: 'dot-water', text: 'Riego intenso todo el exterior — verano seco de Chillán' },
-      { dot: 'dot-general', text: 'Monstera y Chamaedorea: pueden necesitar riego más frecuente por el calor' },
-      { dot: 'dot-flowers', text: 'Orquídea: el calor y luz de diciembre puede estimular nueva vara floral' },
-    ]},
-  ];
-
-  function buildCalendar() {
-    const grid = document.getElementById('calendarGrid');
-    calendarData.forEach(m => {
-      const card = document.createElement('div');
-      card.className = 'month-card';
-      const tasks = m.tasks.map(t =>
-        `<div class="task-item"><div class="task-dot ${t.dot}"></div>${t.text}</div>`
-      ).join('');
-      card.innerHTML = `
-        <div class="month-header ${m.season}">${m.month}<span>📍 ${m.label} en Chillán</span></div>
-        <div class="month-tasks">${tasks}</div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-  buildCalendar();
-
-  // ── CALENDARIO DE RIEGO 2026 ──
-  const EXTERIOR_IDS = new Set(['hortensia','lavanda','agapanto','bailarina','tulipan']);
-
-  const plants2026 = [
-    { id: 'monstera',     name: '🌿 Monstera',            color: '#4a9e5c', exterior: false,
-      intervals: { 0:7,1:7,2:10,3:10,4:10,5:18,6:18,7:18,8:8,9:8,10:8,11:7 }, startDay: 1 },
-    { id: 'philodendron', name: '🍃 Philodendron Brasil',  color: '#2e7d32', exterior: false,
-      intervals: { 0:8,1:8,2:10,3:10,4:12,5:16,6:16,7:16,8:9,9:9,10:9,11:8 }, startDay: 2 },
-    { id: 'pothos',       name: '🌿 Golden Pothos',        color: '#7cb342', exterior: false,
-      intervals: { 0:8,1:8,2:10,3:10,4:12,5:16,6:16,7:16,8:9,9:9,10:9,11:8 }, startDay: 4 },
-    { id: 'dracena',      name: '🌴 Dracena Marginata',    color: '#a0522d', exterior: false,
-      intervals: { 0:12,1:12,2:14,3:16,4:18,5:26,6:26,7:26,8:14,9:14,10:14,11:12 }, startDay: 3 },
-    { id: 'hortensia',    name: '🌸 Hortensia',            color: '#e91e8c', exterior: true,
-      intervals: { 0:1,1:1,2:3,3:5,4:7,5:10,6:10,7:10,8:5,9:4,10:3,11:1 }, startDay: 1 },
-    { id: 'lavanda',      name: '💜 Lavanda',              color: '#7b5ea7', exterior: true,
-      intervals: { 0:12,1:12,2:14,3:16,4:20,5:0,6:0,7:0,8:14,9:12,10:12,11:12 }, startDay: 5 },
-    { id: 'agapanto',     name: '🌼 Agapanto',             color: '#1565c0', exterior: true,
-      intervals: { 0:6,1:6,2:9,3:12,4:16,5:28,6:28,7:28,8:10,9:8,10:7,11:6 }, startDay: 3 },
-    { id: 'bailarina',    name: '🌹 Bailarina',            color: '#c62828', exterior: true,
-      intervals: { 0:3,1:3,2:4,3:6,4:8,5:10,6:10,7:10,8:4,9:3,10:3,11:3 }, startDay: 2 },
-    { id: 'tulipan',      name: '🌷 Tulipán',              color: '#f57f17', exterior: true,
-      intervals: { 0:0,1:0,2:0,3:10,4:10,5:0,6:0,7:0,8:10,9:10,10:0,11:0 }, startDay: 1 },
-    // Sansevieria: primeras 3 semanas sin riego (recién plantada, abril 2026 = mes 3)
-    // luego muy espaciado: verano 28d, otoño 35d, invierno 55d, primavera 28d
-    { id: 'sansevieria',  name: '🌵 Lengua de Suegra',     color: '#5d8c3e', exterior: false,
-      intervals: { 0:28,1:28,2:35,3:35,4:35,5:55,6:55,7:55,8:28,9:28,10:28,11:28 }, startDay: 22 },
-    { id: 'orquidea',     name: '🌸 Orquídea',             color: '#9c27b0', exterior: false,
-      intervals: { 0:12,1:12,2:14,3:14,4:16,5:18,6:18,7:18,8:12,9:12,10:12,11:12 }, startDay: 5 },
-    { id: 'chamaedorea',  name: '🌴 Chamaedorea',          color: '#00796b', exterior: false,
-      intervals: { 0:8,1:8,2:10,3:12,4:14,5:16,6:16,7:16,8:9,9:9,10:9,11:8 }, startDay: 6 },
-    { id: 'ruda',         name: '🌿 Ruda',                  color: '#827717', exterior: true,
-      intervals: { 0:12,1:12,2:14,3:14,4:16,5:0,6:0,7:0,8:12,9:12,10:12,11:12 }, startDay: 7 },
-  ];
-
-  // Persist state in localStorage
-  // dayStates: { 'YYYY-MM-DD': 'rain-moderate' | 'rain-heavy' | 'absent' }
-  let dayStates = JSON.parse(localStorage.getItem('dayStates_2026') || '{}');
-
-  function saveStates() {
-    localStorage.setItem('dayStates_2026', JSON.stringify(dayStates));
-  }
-
-  function getState(key) { return dayStates[key] || null; }
-
-  function setState(key, state) {
-    // Toggle off if same state clicked again
-    if (dayStates[key] === state) {
-      delete dayStates[key];
-    } else {
-      dayStates[key] = state;
-    }
-    saveStates();
-    rebuildAndRender();
-    closeDayPopup();
-  }
-
-  // Build watering days with 3-mode logic — iterates the full year continuously
-  // - rain-moderate/heavy: exterior plants count that day as watered, reschedule from there
-  //   (rain-heavy adds 1 extra day of margin before next watering)
-  // - absent: ALL plants postpone watering to first non-absent day after the block
-  function buildWateringDays() {
-    const result = {};
-
-    // Helper: convert day-of-year index (0=Jan1) to 'YYYY-MM-DD'
-    function idxToKey(idx) {
-      const d = new Date(2026, 0, 1 + idx);
-      return `2026-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    }
-
-    // Helper: get month index (0–11) from day-of-year index
-    function idxToMonth(idx) {
-      return new Date(2026, 0, 1 + idx).getMonth();
-    }
-
-    // Total days in 2026
-    const TOTAL = 365;
-
-    plants2026.forEach(p => {
-      result[p.id] = new Set();
-      const isExterior = p.exterior;
-
-      // nextWater = day-of-year index when this plant is next due
-      // Start from p.startDay - 1 (0-based) in month 0
-      let nextWater = p.startDay - 1; // first scheduled day
-
-      while (nextWater < TOTAL) {
-        const m = idxToMonth(nextWater);
-        const interval = p.intervals[m];
-
-        // If this plant has no interval this month (e.g. tulipan in off months), skip to next month
-        if (!interval || interval === 0) {
-          // Jump to first day of next month
-          nextWater = TOTAL; // find next valid month
-          for (let mm = m + 1; mm < 12; mm++) {
-            if (p.intervals[mm] && p.intervals[mm] > 0) {
-              nextWater = new Date(2026, mm, p.startDay).getTime();
-              nextWater = Math.round((new Date(2026, mm, p.startDay) - new Date(2026, 0, 1)) / 86400000);
-              break;
-            }
-          }
-          continue;
-        }
-
-        const key = idxToKey(nextWater);
-        const state = getState(key);
-
-        // --- ABSENCE: affects all plants ---
-        if (state === 'absent') {
-          // Find first non-absent day to water instead
-          let shifted = nextWater + 1;
-          while (shifted < TOTAL) {
-            const sk = idxToKey(shifted);
-            if (getState(sk) !== 'absent') {
-              result[p.id].add(sk);
-              break;
-            }
-            shifted++;
-          }
-          // Advance by interval from original scheduled day (not shifted)
-          nextWater += interval;
-          continue;
-        }
-
-        // --- RAIN: only affects exterior plants ---
-        if (isExterior && (state === 'rain-moderate' || state === 'rain-heavy')) {
-          // Rain waters the plant — count as done, advance by interval
-          // rain-heavy adds 1 extra day (soil stays wet longer)
-          const extra = state === 'rain-heavy' ? 1 : 0;
-          nextWater += interval + extra;
-          continue;
-        }
-
-        // --- NORMAL SCHEDULED DAY ---
-        // Check if landing day itself is blocked (absent or rain-on-exterior)
-        // and push forward if needed
-        let target = nextWater;
-        while (target < TOTAL) {
-          const tk = idxToKey(target);
-          const ts = getState(tk);
-          if (ts === 'absent') { target++; continue; }
-          if (isExterior && (ts === 'rain-moderate' || ts === 'rain-heavy')) {
-            // Rain on scheduled day: counts as watered, reschedule from that rain day
-            const extra = ts === 'rain-heavy' ? 1 : 0;
-            nextWater = target + interval + extra;
-            target = -1; // signal that rain handled advancement
-            break;
-          }
-          break;
-        }
-
-        if (target === -1) continue; // rain handled it, already advanced nextWater
-
-        if (target < TOTAL) {
-          result[p.id].add(idxToKey(target));
-        }
-
-        // Advance to next scheduled interval from the ORIGINAL due date (not target)
-        nextWater += interval;
+function buildPlantDays(p) {
+  const days = new Set();
+  if (!p.exterior) {
+    for (let m=0; m<12; m++) {
+      const iv = p.intervals[m]; if (!iv) continue;
+      const dim = new Date(2026,m+1,0).getDate();
+      for (let d=1; d<=dim; d+=iv) {
+        const raw = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        days.add(shiftAbsence(raw));
       }
-    });
-
-    return result;
-  }
-
-  let wateringDays = buildWateringDays();
-  let activeFilters = new Set(plants2026.map(p => p.id));
-  let collapsedMonths = new Set(JSON.parse(localStorage.getItem('collapsedMonths') || '[]'));
-
-  function toggleMonth(m) {
-    if (collapsedMonths.has(m)) {
-      collapsedMonths.delete(m);
-    } else {
-      collapsedMonths.add(m);
     }
-    localStorage.setItem('collapsedMonths', JSON.stringify([...collapsedMonths]));
-    // Toggle DOM directly without full re-render for smoothness
-    const body = document.getElementById(`body-${m}`);
-    const btn  = body ? body.previousElementSibling.querySelector('.month-collapse-btn') : null;
-    if (body) body.classList.toggle('collapsed', collapsedMonths.has(m));
-    if (btn)  btn.classList.toggle('collapsed', collapsedMonths.has(m));
+    return days;
   }
 
-  function rebuildAndRender() {
-    wateringDays = buildWateringDays();
+  const rainList = Object.keys(rainEvents)
+    .filter(k=>k.startsWith('2026-'))
+    .map(k=>({idx:dateToIdx(k), type:rainEvents[k]}))
+    .sort((a,b)=>a.idx-b.idx);
+
+  // Dos moderadas consecutivas → la segunda se trata como intensa
+  const effectiveRainList = rainList.map((r,i) => {
+    if (r.type==='moderate' && i>0 && rainList[i-1].type==='moderate' && r.idx===rainList[i-1].idx+1)
+      return {...r, type:'intense'};
+    return r;
+  });
+
+  let next = START_IDX;
+  while (next < 365) {
+    const key0 = idxToKey(next);
+    const m0 = keyToMonth(key0);
+    const iv = p.intervals[m0];
+    if (!iv) {
+      const nm = m0+1; if (nm>=12) break;
+      next = dateToIdx(`2026-${String(nm+1).padStart(2,'0')}-01`);
+      continue;
+    }
+    const key = shiftAbsence(key0);
+    const waterIdx = dateToIdx(key);
+    if (waterIdx >= 365) break;
+    days.add(key);
+    let nextIdx = waterIdx + iv;
+    // Find last rain in window (waterIdx, nextIdx]
+    const rainWindow = effectiveRainList.filter(r => r.idx > waterIdx && r.idx <= nextIdx);
+    if (rainWindow.length > 0) {
+      const lr = rainWindow[rainWindow.length-1];
+      const lrIv = p.intervals[keyToMonth(idxToKey(lr.idx))] || iv;
+      nextIdx = lr.idx + (lr.type==='intense' ? lrIv : Math.ceil(lrIv/2));
+    }
+    // Rain exactly on the next scheduled day
+    const onDay = effectiveRainList.find(r => r.idx === nextIdx);
+    if (onDay) {
+      const odIv = p.intervals[keyToMonth(idxToKey(onDay.idx))] || iv;
+      nextIdx = onDay.idx + (onDay.type==='intense' ? odIv : Math.ceil(odIv/2));
+    }
+    next = nextIdx;
+  }
+  return days;
+}
+
+function buildAllDays() {
+  const r = {};
+  PLANTS.forEach(p => { r[p.id] = buildPlantDays(p); });
+  return r;
+}
+let waterDays = buildAllDays();
+let activeFilters = new Set(PLANTS.map(p=>p.id));
+
+// ── EXPORT / IMPORT ──
+function exportData() {
+  const payload = { version:1, exportedAt:new Date().toISOString(), rainEvents, absenceEvents, journalEntries:entries };
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
+  a.download = `bitacora_plantas_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  setDataStatus('✅ Datos exportados correctamente');
+}
+function importData(ev) {
+  const file = ev.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const p = JSON.parse(e.target.result);
+      if (p.version!==1 || typeof p.rainEvents!=='object') { setDataStatus('❌ Archivo inválido'); return; }
+      rainEvents = p.rainEvents || {};
+      saveRainEvents();
+      absenceEvents = p.absenceEvents || {};
+      saveAbsenceEvents();
+      if (Array.isArray(p.journalEntries)) {
+        entries = p.journalEntries;
+        localStorage.setItem('plantEntries_chillan', JSON.stringify(entries));
+        renderEntries();
+      }
+      waterDays = buildAllDays();
+      renderYear();
+      setDataStatus(`✅ Importado: ${Object.keys(rainEvents).length} lluvia(s), ${Object.keys(absenceEvents).length} ausencia(s), ${entries.length} entrada(s)`);
+    } catch { setDataStatus('❌ Error al leer el archivo'); }
+  };
+  reader.readAsText(file);
+  ev.target.value = '';
+}
+function setDataStatus(msg) {
+  const el = document.getElementById('dataStatus');
+  if (el) { el.textContent = msg; setTimeout(()=>el.textContent='', 4000); }
+}
+
+// ── FILTER BAR ──
+function buildFilterBar() {
+  const bar = document.getElementById('plantFilterBar');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn active';
+  allBtn.style.cssText = 'background:#2d4a2a;color:white;border-color:#2d4a2a;';
+  allBtn.textContent = 'Todas';
+  allBtn.onclick = () => {
+    activeFilters = new Set(PLANTS.map(p=>p.id));
+    bar.querySelectorAll('[data-pid]').forEach(b => {
+      b.classList.add('active');
+      const pl = PLANTS.find(x=>x.id===b.dataset.pid);
+      b.style.background = pl.color; b.style.color = 'white';
+    });
+    allBtn.style.background = '#2d4a2a';
     renderYear();
-  }
-
-  function buildFilterBar() {
-    const bar = document.getElementById('plantFilterBar');
-    const allBtn = document.createElement('button');
-    allBtn.className = 'filter-btn active';
-    allBtn.style.cssText = 'background:#2d4a2a; color:white; border-color:#2d4a2a;';
-    allBtn.textContent = 'Todas';
-    allBtn.id = 'filter-all';
-    allBtn.onclick = () => {
-      activeFilters = new Set(plants2026.map(p => p.id));
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.add('active');
-        const pid = b.dataset.pid;
-        if (pid) { const pl = plants2026.find(x=>x.id===pid); b.style.background=pl.color; b.style.color='white'; }
-        else { b.style.background='#2d4a2a'; b.style.color='white'; }
-      });
+  };
+  bar.appendChild(allBtn);
+  PLANTS.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn active';
+    btn.style.cssText = `background:${p.color};color:white;border-color:${p.color};`;
+    btn.dataset.pid = p.id;
+    btn.textContent = p.name;
+    btn.onclick = () => {
+      if (activeFilters.has(p.id)) {
+        activeFilters.delete(p.id); btn.classList.remove('active');
+        btn.style.background='white'; btn.style.color='#1e2820';
+      } else {
+        activeFilters.add(p.id); btn.classList.add('active');
+        btn.style.background=p.color; btn.style.color='white';
+      }
       renderYear();
     };
-    bar.appendChild(allBtn);
-    plants2026.forEach(p => {
-      const btn = document.createElement('button');
-      btn.className = 'filter-btn active';
-      btn.style.background = p.color;
-      btn.style.color = 'white';
-      btn.style.borderColor = p.color;
-      btn.dataset.pid = p.id;
-      btn.textContent = p.name;
-      btn.onclick = () => {
-        if (activeFilters.has(p.id)) {
-          activeFilters.delete(p.id);
-          btn.classList.remove('active');
-          btn.style.background = 'white';
-          btn.style.color = '#1e2820';
-          btn.style.borderColor = p.color;
-        } else {
-          activeFilters.add(p.id);
-          btn.classList.add('active');
-          btn.style.background = p.color;
-          btn.style.color = 'white';
-        }
-        renderYear();
-      };
-      bar.appendChild(btn);
-    });
+    bar.appendChild(btn);
+  });
+}
+
+// ── RENDER CALENDAR ──
+const MONTH_NAMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const SEASON_OF = [
+  {n:'Verano',c:'verano'},{n:'Verano',c:'verano'},
+  {n:'Otoño',c:'otono'},{n:'Otoño',c:'otono'},{n:'Otoño',c:'otono'},
+  {n:'Invierno',c:'invierno'},{n:'Invierno',c:'invierno'},{n:'Invierno',c:'invierno'},
+  {n:'Primavera',c:'primavera'},{n:'Primavera',c:'primavera'},{n:'Primavera',c:'primavera'},
+  {n:'Verano',c:'verano'}
+];
+const SEASON_BG = {verano:'#b85c2a', otono:'#7a6340', invierno:'#3a5070', primavera:'#4a6741'};
+const WEEKDAYS = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const TODAY = new Date().toISOString().split('T')[0];
+const DAY_NAMES = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+
+function renderYear() {
+  const container = document.getElementById('cal2026');
+  container.innerHTML = '';
+
+  // Legend
+  const leg = document.createElement('div');
+  leg.className = 'drop-legend';
+  PLANTS.filter(p=>activeFilters.has(p.id)).forEach(p => {
+    leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:${p.color}"></div>${p.name}</div>`;
+  });
+  leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:#4a90d9"></div>🌦️ Lluvia moderada</div>`;
+  leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:#1a3a5c"></div>⛈️ Lluvia intensa</div>`;
+  leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:#f5a623"></div>✈️ Ausencia</div>`;
+  container.appendChild(leg);
+
+  // Rain summary
+  const rainKeys = Object.keys(rainEvents).filter(k=>k.startsWith('2026-')).sort();
+  if (rainKeys.length > 0) {
+    const rs = document.createElement('div');
+    rs.style.cssText = 'background:#e8f0f8;border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:13px;border:1px solid #b0c8e8;line-height:1.8';
+    // Detectar moderadas consecutivas para mostrar indicador
+    const rainIdxMap = {};
+    rainKeys.forEach(k => { rainIdxMap[dateToIdx(k)] = rainEvents[k]; });
+    rs.innerHTML = `<strong style="color:#1a3a5c">🌧️ Lluvias registradas (${rainKeys.length}):</strong> `
+      + rainKeys.map(k => {
+          const dd = new Date(k+'T12:00:00');
+          const idx = dateToIdx(k);
+          const rawType = rainEvents[k];
+          const isEffectivelyIntense = rawType==='moderate' && rainIdxMap[idx-1]==='moderate';
+          const lbl = rawType==='intense' ? '⛈️' : isEffectivelyIntense ? '🌦️→⛈️' : '🌦️';
+          return `<span style="display:inline-block;margin:2px 4px;background:white;padding:2px 8px;border-radius:8px;border:1px solid #b0c8e8;cursor:pointer" onclick="removeRainDirect('${k}')" title="Toca para eliminar">${lbl} ${dd.getDate()} ${MONTH_NAMES[dd.getMonth()].slice(0,3)} ✕</span>`;
+        }).join('');
+    if (rainKeys.some(k => { const idx=dateToIdx(k); return rainEvents[k]==='moderate' && rainIdxMap[idx-1]==='moderate'; }))
+      rs.innerHTML += `<div style="margin-top:6px;font-size:11px;color:#5470a0;font-style:italic">💡 🌦️→⛈️ indica moderada que se trata como intensa por ser dos consecutivas</div>`;
+    container.appendChild(rs);
   }
 
-  const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const seasonOf = [
-    {name:'Verano',cls:'verano'},{name:'Verano',cls:'verano'},
-    {name:'Otoño',cls:'otono'},{name:'Otoño',cls:'otono'},{name:'Otoño',cls:'otono'},
-    {name:'Invierno',cls:'invierno'},{name:'Invierno',cls:'invierno'},{name:'Invierno',cls:'invierno'},
-    {name:'Primavera',cls:'primavera'},{name:'Primavera',cls:'primavera'},{name:'Primavera',cls:'primavera'},
-    {name:'Verano',cls:'verano'}
-  ];
-  const seasonBg = { verano:'#b85c2a', otono:'#7a6340', invierno:'#3a5070', primavera:'#4a6741' };
-  const weekDays = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
-  const today = new Date().toISOString().split('T')[0];
-
-  function renderYear() {
-    const container = document.getElementById('cal2026');
-    container.innerHTML = '';
-
-    // Summary badges
-    const rainModCount  = Object.values(dayStates).filter(s => s === 'rain-moderate').length;
-    const rainHeavCount = Object.values(dayStates).filter(s => s === 'rain-heavy').length;
-    const absentCount   = Object.values(dayStates).filter(s => s === 'absent').length;
-
-    if (rainModCount + rainHeavCount > 0) {
-      const b = document.createElement('div');
-      b.className = 'summary-badge badge-rain';
-      b.innerHTML = `<span style="font-size:18px">🌧️</span> <span><strong>${rainModCount + rainHeavCount} día${rainModCount+rainHeavCount>1?'s':''} de lluvia</strong> registrados — riegos de exterior recalculados.</span>`;
-      container.appendChild(b);
-    }
-    if (absentCount > 0) {
-      const b = document.createElement('div');
-      b.className = 'summary-badge badge-absent';
-      b.innerHTML = `<span style="font-size:18px">🏠</span> <span><strong>${absentCount} día${absentCount>1?'s':''} de ausencia</strong> — riegos de todas las plantas postergados.</span>`;
-      container.appendChild(b);
-    }
-
-    // Legend
-    const leg = document.createElement('div');
-    leg.className = 'drop-legend';
-    const activePlants = plants2026.filter(p => activeFilters.has(p.id));
-    activePlants.forEach(p => {
-      leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:${p.color}"></div>${p.name}</div>`;
-    });
-    leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:#6aabe6"></div>🌦️ Lluvia mod.</div>`;
-    leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:#3a6fd8"></div>🌧️ Lluvia intensa</div>`;
-    leg.innerHTML += `<div class="drop-legend-item"><div class="drop-legend-dot" style="background:#ffb74d"></div>🏠 Ausencia</div>`;
-    if (activePlants.length === 0) leg.innerHTML = '<span style="color:#aaa;font-size:13px;font-style:italic">Selecciona una planta para ver los días de riego</span>';
-    container.appendChild(leg);
-
-    const grid = document.createElement('div');
-    grid.className = 'year-grid';
-
-    for (let m = 0; m < 12; m++) {
-      const season = seasonOf[m];
-      const bg = seasonBg[season.cls];
-      const daysInMonth = new Date(2026, m + 1, 0).getDate();
-      const firstDow = (new Date(2026, m, 1).getDay() + 6) % 7;
-
-      const dayDrops = {};
-      for (let d = 1; d <= daysInMonth; d++) {
-        const key = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        dayDrops[d] = plants2026
-          .filter(p => activeFilters.has(p.id) && wateringDays[p.id].has(key))
-          .map(p => ({color: p.color, name: p.name, exterior: p.exterior}));
-      }
-
-      const isCollapsed = collapsedMonths.has(m);
-
-      const monthEl = document.createElement('div');
-      monthEl.className = 'month-cal';
-      monthEl.innerHTML = `
-        <div class="month-cal-header" style="background:${bg}" onclick="toggleMonth(${m})">
-          <div class="header-left">
-            <span>${monthNames[m]} 2026</span>
-            <span class="season-tag">${season.name} en Chillán</span>
-          </div>
-          <button class="month-collapse-btn ${isCollapsed ? 'collapsed' : ''}" onclick="toggleMonth(${m});event.stopPropagation()">▾</button>
-        </div>
-        <div class="month-cal-body ${isCollapsed ? 'collapsed' : ''}" id="body-${m}">
-          <div class="cal-weekdays" style="background:${bg}">
-            ${weekDays.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}
-          </div>
-          <div class="cal-days" id="days-${m}"></div>
-        </div>
-      `;
-      grid.appendChild(monthEl);
-      const daysEl = monthEl.querySelector(`#days-${m}`);
-
-      for (let i = 0; i < firstDow; i++) {
-        const e = document.createElement('div'); e.className = 'cal-day empty'; daysEl.appendChild(e);
-      }
-
-      for (let d = 1; d <= daysInMonth; d++) {
-        const drops = dayDrops[d];
-        const key = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const isToday = key === today;
-        const state = getState(key);
-
-        const cell = document.createElement('div');
-        let cls = 'cal-day ';
-        if      (state === 'rain-moderate') cls += 'is-rain-moderate';
-        else if (state === 'rain-heavy')    cls += 'is-rain-heavy';
-        else if (state === 'absent')        cls += 'is-absent';
-        else if (drops.length > 0)          cls += 'has-watering';
-        else                                cls += 'normal';
-        if (isToday) cls += ' today-mark';
-        cell.className = cls;
-
-        let icon = '';
-        if      (state === 'rain-moderate') icon = `<span class="rain-icon">🌦️</span>`;
-        else if (state === 'rain-heavy')    icon = `<span class="rain-icon">🌧️</span>`;
-        else if (state === 'absent')        icon = `<span class="rain-icon">🏠</span>`;
-        else if (drops.length > 0)          icon = `<div class="drop-row">${drops.map(dr=>`<div class="drop" style="background:${dr.color}"></div>`).join('')}</div>`;
-
-        const numStyle = (drops.length > 0 && !state) ? 'font-weight:600;color:#1565c0' : '';
-        cell.innerHTML = `<span class="day-num" style="${numStyle}">${d}</span>${icon}`;
-        cell.addEventListener('click', () => openDayPopup(d, m, drops, key));
-        daysEl.appendChild(cell);
-      }
-    }
-    container.appendChild(grid);
+  // Absence summary
+  const absenceKeys = Object.keys(absenceEvents).filter(k=>k.startsWith('2026-')).sort();
+  if (absenceKeys.length > 0) {
+    const as = document.createElement('div');
+    as.style.cssText = 'background:#fff8e7;border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:13px;border:1px solid #f5d06b;line-height:1.8';
+    as.innerHTML = `<strong style="color:#7a5000">✈️ Ausencias registradas (${absenceKeys.length}):</strong> `
+      + absenceKeys.map(k => {
+          const dd = new Date(k+'T12:00:00');
+          return `<span style="display:inline-block;margin:2px 4px;background:white;padding:2px 8px;border-radius:8px;border:1px solid #f5d06b;cursor:pointer" onclick="removeAbsenceDirect('${k}')" title="Toca para eliminar">✈️ ${dd.getDate()} ${MONTH_NAMES[dd.getMonth()].slice(0,3)} ✕</span>`;
+        }).join('');
+    container.appendChild(as);
   }
 
-  const dayNames = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const grid = document.createElement('div');
+  grid.className = 'year-grid';
 
-  function openDayPopup(d, m, drops, key) {
-    const existing = document.getElementById('dayPopupOverlay');
-    if (existing) existing.remove();
+  for (let m=0; m<12; m++) {
+    const s = SEASON_OF[m];
+    const bg = SEASON_BG[s.c];
+    const dim = new Date(2026,m+1,0).getDate();
+    const fdow = (new Date(2026,m,1).getDay()+6)%7;
 
-    const date = new Date(2026, m, d);
-    const dayName = dayNames[date.getDay()];
-    const season = seasonOf[m].name;
-    const state = getState(key);
-
-    const overlay = document.createElement('div');
-    overlay.className = 'day-popup-overlay';
-    overlay.id = 'dayPopupOverlay';
-
-    // Plants section
-    let plantsHtml = '';
-    if (state === 'rain-moderate') {
-      plantsHtml = `<div style="text-align:center;padding:12px 0 4px;font-size:28px">🌦️</div>
-        <div style="text-align:center;color:#1a56a0;font-size:13px;font-weight:500;margin-bottom:2px;">Lluvia moderada registrada</div>
-        <div style="text-align:center;color:#5a6a5c;font-size:12px;margin-bottom:8px;">Las plantas de exterior no necesitan riego.</div>`;
-    } else if (state === 'rain-heavy') {
-      plantsHtml = `<div style="text-align:center;padding:12px 0 4px;font-size:28px">🌧️</div>
-        <div style="text-align:center;color:#0d3b8c;font-size:13px;font-weight:500;margin-bottom:2px;">Lluvia intensa registrada</div>
-        <div style="text-align:center;color:#5a6a5c;font-size:12px;margin-bottom:8px;">Exterior: sin riego + 1 día extra de margen.</div>`;
-    } else if (state === 'absent') {
-      plantsHtml = `<div style="text-align:center;padding:12px 0 4px;font-size:28px">🏠</div>
-        <div style="text-align:center;color:#e65100;font-size:13px;font-weight:500;margin-bottom:2px;">Día de ausencia registrado</div>
-        <div style="text-align:center;color:#5a6a5c;font-size:12px;margin-bottom:8px;">Todos los riegos postergados al siguiente día disponible.</div>`;
-    } else if (drops.length > 0) {
-      plantsHtml = `<div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#7a9e7e;margin-bottom:8px;font-weight:500;">Regar hoy</div>
-        <div class="popup-plant-list">${drops.map(dr => `
-          <div class="popup-plant-item">
-            <div class="popup-plant-dot" style="background:${dr.color}"></div>
-            <span class="popup-plant-name">${dr.name}</span>
-            ${dr.exterior
-              ? '<span style="font-size:10px;background:#fce8d8;color:#8b6f47;padding:2px 6px;border-radius:8px;margin-left:auto;">Exterior</span>'
-              : '<span style="font-size:10px;background:#d4e6d6;color:#4a6741;padding:2px 6px;border-radius:8px;margin-left:auto;">Interior</span>'}
-          </div>`).join('')}
-        </div>`;
-    } else {
-      plantsHtml = `<div class="popup-no-water">Sin riego programado para hoy</div>`;
+    // Precompute drops per day
+    const dayDrops = {};
+    for (let d=1; d<=dim; d++) {
+      const k = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      dayDrops[d] = PLANTS.filter(p=>activeFilters.has(p.id)&&waterDays[p.id].has(k)).map(p=>({color:p.color,name:p.name,exterior:p.exterior}));
     }
 
-    overlay.innerHTML = `
-      <div class="day-popup">
-        <button class="day-popup-close" onclick="closeDayPopup()">✕</button>
-        <div class="day-popup-date">${dayName.charAt(0).toUpperCase()+dayName.slice(1)} ${d} de ${monthNames[m]}</div>
-        <div class="day-popup-season">${season} en Chillán</div>
-        ${plantsHtml}
-        <div class="popup-actions">
-          <button class="popup-action-btn btn-rain-moderate ${state==='rain-moderate'?'active':''}"
-            onclick="setState('${key}','rain-moderate')">
-            🌦️ ${state==='rain-moderate' ? 'Quitar lluvia moderada' : 'Lluvia moderada'}
-          </button>
-          <button class="popup-action-btn btn-rain-heavy ${state==='rain-heavy'?'active':''}"
-            onclick="setState('${key}','rain-heavy')">
-            🌧️ ${state==='rain-heavy' ? 'Quitar lluvia intensa' : 'Lluvia intensa'}
-          </button>
-          <button class="popup-action-btn btn-absent ${state==='absent'?'active':''}"
-            onclick="setState('${key}','absent')">
-            🏠 ${state==='absent' ? 'Quitar ausencia' : 'Marcar ausencia'}
-          </button>
-        </div>
-        <div class="popup-action-note">
-          Lluvia mod.: exterior sin riego ese día · Lluvia intensa: + 1 día extra · Ausencia: todas las plantas postergadas
-        </div>
+    const monthEl = document.createElement('div');
+    monthEl.className = 'month-cal';
+    monthEl.innerHTML = `
+      <div class="month-cal-header" style="background:${bg}">
+        <span>${MONTH_NAMES[m]} 2026</span>
+        <span class="season-tag">${s.n} en Chillán</span>
       </div>
-    `;
+      <div class="cal-weekdays" style="background:${bg}">
+        ${WEEKDAYS.map(w=>`<div class="cal-weekday">${w}</div>`).join('')}
+      </div>
+      <div class="cal-days" id="cd-${m}"></div>`;
+    grid.appendChild(monthEl);
+    const daysEl = monthEl.querySelector(`#cd-${m}`);
 
-    overlay.addEventListener('click', e => { if (e.target === overlay) closeDayPopup(); });
-    document.body.appendChild(overlay);
+    for (let i=0; i<fdow; i++) {
+      const e=document.createElement('div'); e.className='cal-day empty'; daysEl.appendChild(e);
+    }
+    for (let d=1; d<=dim; d++) {
+      const key = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const drops = dayDrops[d];
+      const rain = rainEvents[key];
+      const absence = absenceEvents[key];
+      const cell = document.createElement('div');
+      let cls = 'cal-day ';
+      if (rain) cls += rain==='intense' ? 'is-rain-intense' : 'is-rain-moderate';
+      else if (absence) cls += 'is-absent';
+      else if (drops.length) cls += 'has-watering';
+      else cls += 'normal';
+      if (key===TODAY) cls += ' today-mark';
+      cell.className = cls;
+
+      const numStyle = rain ? 'color:white;font-weight:700' : absence ? 'font-weight:700;color:#7a5000' : drops.length ? 'font-weight:600;color:#1565c0' : '';
+      let inner = `<span class="day-num" style="${numStyle}">${d}</span>`;
+      if (rain) inner += `<div style="font-size:10px;line-height:1;margin-top:1px">${rain==='intense'?'⛈️':'🌦️'}</div>`;
+      else if (absence) inner += `<div style="font-size:10px;line-height:1;margin-top:1px">✈️</div>`;
+      else if (drops.length) inner += `<div class="drop-row">${drops.map(dr=>`<div class="drop" style="background:${dr.color}"></div>`).join('')}</div>`;
+      cell.innerHTML = inner;
+      cell.addEventListener('click', () => openPopup(d, m, drops, key, rain, absence));
+      daysEl.appendChild(cell);
+    }
   }
+  container.appendChild(grid);
+}
 
-  function closeDayPopup() {
-    const el = document.getElementById('dayPopupOverlay');
-    if (el) el.remove();
-  }
+// ── POPUP ──
+function openPopup(d, m, drops, key, rain, absence) {
+  closeDayPopup();
+  const dayName = DAY_NAMES[new Date(2026,m,d).getDay()];
+  const season = SEASON_OF[m].n;
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDayPopup(); });
+  const plantsHtml = absence
+    ? `<div class="popup-no-water">✈️ Ausente — riegos postergados al siguiente día disponible</div>`
+    : drops.length
+      ? drops.map(dr=>`<div class="popup-plant-item"><div class="popup-plant-dot" style="background:${dr.color}"></div><span>${dr.name}</span><span style="font-size:10px;color:${dr.exterior?'#7a6340':'#4a6741'};margin-left:auto">${dr.exterior?'exterior':'interior'}</span></div>`).join('')
+      : `<div class="popup-no-water">Sin riego programado este día</div>`;
 
-  buildFilterBar();
-  renderYear();
+  const selMod = rain==='moderate' ? 'selected-moderate' : '';
+  const selInt = rain==='intense' ? 'selected-intense' : '';
 
-  // Service Worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('SW registrado:', reg.scope))
-        .catch(err => console.log('SW error:', err));
-    });
-  }
+  const overlay = document.createElement('div');
+  overlay.className = 'day-popup-overlay';
+  overlay.id = 'dayPopupOverlay';
+  overlay.innerHTML = `
+    <div class="day-popup">
+      <button class="day-popup-close" onclick="closeDayPopup()">✕</button>
+      <div class="day-popup-date">${dayName.charAt(0).toUpperCase()+dayName.slice(1)} ${d} de ${MONTH_NAMES[m]}</div>
+      <div class="day-popup-season">${absence?'✈️ Ausente':rain?(rain==='intense'?'⛈️ Lluvia intensa':'🌦️ Lluvia moderada'):'💧 '+season+' · Chillán'}</div>
+      <div class="popup-plant-list">${plantsHtml}</div>
+      <div class="rain-section">
+        <div class="rain-section-label">🌧️ ¿Llovió este día?</div>
+        <div class="rain-btns">
+          <button class="rain-btn ${selMod}" onclick="setRain('${key}','moderate')">🌦️ Moderada</button>
+          <button class="rain-btn ${selInt}" onclick="setRain('${key}','intense')">⛈️ Intensa</button>
+          ${rain?`<button class="rain-btn remove" onclick="removeRain('${key}')">✕ Quitar</button>`:''}
+        </div>
+        ${rain
+          ? `<div class="rain-status">Lluvia ${rain==='intense'?'intensa ⛈️':'moderada 🌦️'} — riegos de exterior recalculados</div>`
+          : `<div class="rain-hint">Toca para registrar lluvia y recalcular riegos de exterior</div>`}
+      </div>
+      <div class="absence-section">
+        <div class="absence-section-label">✈️ Ausencia</div>
+        <div class="rain-btns">
+          ${absence
+            ? `<button class="absence-btn remove" onclick="removeAbsence('${key}')">✕ Quitar ausencia</button>`
+            : `<button class="absence-btn" onclick="setAbsence('${key}')">✈️ Marcar ausente</button>`}
+        </div>
+        ${absence
+          ? `<div class="absence-status">Riegos del día postergados al siguiente día disponible</div>`
+          : `<div class="rain-hint">Si no puedes regar, los riegos se posponen un día</div>`}
+      </div>
+    </div>`;
+  overlay.addEventListener('click', e => { if(e.target===overlay) closeDayPopup(); });
+  document.body.appendChild(overlay);
+}
+
+function setRain(key, type) {
+  rainEvents[key] = type; saveRainEvents();
+  waterDays = buildAllDays(); closeDayPopup(); renderYear();
+  const d=parseInt(key.split('-')[2]), m=parseInt(key.split('-')[1])-1;
+  const drops=PLANTS.filter(p=>activeFilters.has(p.id)&&waterDays[p.id].has(key)).map(p=>({color:p.color,name:p.name,exterior:p.exterior}));
+  openPopup(d, m, drops, key, type);
+}
+function removeRain(key) {
+  delete rainEvents[key]; saveRainEvents();
+  waterDays = buildAllDays(); closeDayPopup(); renderYear();
+  const d=parseInt(key.split('-')[2]), m=parseInt(key.split('-')[1])-1;
+  const drops=PLANTS.filter(p=>activeFilters.has(p.id)&&waterDays[p.id].has(key)).map(p=>({color:p.color,name:p.name,exterior:p.exterior}));
+  openPopup(d, m, drops, key, null);
+}
+function removeRainDirect(key) {
+  delete rainEvents[key]; saveRainEvents();
+  waterDays = buildAllDays(); renderYear();
+}
+function setAbsence(key) {
+  absenceEvents[key] = true; saveAbsenceEvents();
+  waterDays = buildAllDays(); closeDayPopup(); renderYear();
+  const d=parseInt(key.split('-')[2]), m=parseInt(key.split('-')[1])-1;
+  const drops=PLANTS.filter(p=>activeFilters.has(p.id)&&waterDays[p.id].has(key)).map(p=>({color:p.color,name:p.name,exterior:p.exterior}));
+  openPopup(d, m, drops, key, rainEvents[key], true);
+}
+function removeAbsence(key) {
+  delete absenceEvents[key]; saveAbsenceEvents();
+  waterDays = buildAllDays(); closeDayPopup(); renderYear();
+  const d=parseInt(key.split('-')[2]), m=parseInt(key.split('-')[1])-1;
+  const drops=PLANTS.filter(p=>activeFilters.has(p.id)&&waterDays[p.id].has(key)).map(p=>({color:p.color,name:p.name,exterior:p.exterior}));
+  openPopup(d, m, drops, key, rainEvents[key], null);
+}
+function removeAbsenceDirect(key) {
+  delete absenceEvents[key]; saveAbsenceEvents();
+  waterDays = buildAllDays(); renderYear();
+}
+function closeDayPopup() { const el=document.getElementById('dayPopupOverlay'); if(el) el.remove(); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeDayPopup(); });
+
+buildFilterBar();
+renderYear();
+
+// ── PWA ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBanner').style.display = 'flex';
+});
+document.getElementById('btnInstall').addEventListener('click', () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(() => {
+    deferredPrompt = null;
+    document.getElementById('installBanner').style.display = 'none';
+  });
+});
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').style.display = 'none';
+});
 </script>
 </body>
 </html>
