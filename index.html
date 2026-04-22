@@ -430,6 +430,21 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
       </div>
     </div>
 
+    <div class="plant-card">
+      <div class="plant-card-header">
+        <div class="plant-icon">🗡️</div>
+        <div><div class="plant-name">Lengua de Suegra</div><span class="plant-type-badge badge-interior">Interior</span></div>
+      </div>
+      <div class="plant-card-body">
+        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego verano</span><span class="care-value">Cada 14 días — toca el sustrato, debe estar completamente seco antes de volver a regar.</span></div>
+        <div class="care-row"><span class="care-icon">❄️</span><span class="care-label">Riego invierno</span><span class="care-value">Cada 35–40 días. En invierno de Chillán puede ir hasta 6 semanas sin riego sin problemas.</span></div>
+        <div class="care-row"><span class="care-icon">☀️</span><span class="care-label">Luz</span><span class="care-value">Muy adaptable — desde sombra hasta luz indirecta brillante. Evita sol directo intenso.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 3–5 años o cuando las raíces quiebren la maceta. Le gusta estar apretada. Trasplanta en primavera.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Temperatura</span><span class="care-value">10–35 °C. Resiste el ambiente seco del invierno con calefacción. No la dejes bajo 5°C.</span></div>
+        <div class="note-box">💡 La planta más resistente al olvido. El mayor riesgo es el exceso de agua — la pudrición de raíces es casi la única causa de muerte. Purifica el aire interior.</div>
+      </div>
+    </div>
+
   </div>
 
   <div class="section-group-label">Exterior</div>
@@ -541,6 +556,7 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
       <tr><td><strong>🌿 Golden Pothos</strong> ×2</td><td><span class="freq-badge">Cada 7–10 días</span></td><td><span class="freq-badge winter">Cada 14 días</span></td><td>Avisa cuando necesita agua colgando levemente las hojas. Muy tolerante.</td></tr>
       <tr><td><strong>🌴 Dracena Marginata</strong></td><td><span class="freq-badge">Cada 10–14 días</span></td><td><span class="freq-badge winter">Cada 21–30 días</span></td><td>Prefiere quedarse algo seca. Usa agua reposada 24h — el flúor le mancha las hojas.</td></tr>
       <tr><td><strong>🌿 Chamaedorea</strong></td><td><span class="freq-badge">Cada 7–9 días</span></td><td><span class="freq-badge winter">Cada 14–18 días</span></td><td>Usa agua reposada 24h — también sensible al flúor. Espera que el tercio superior del sustrato seque entre riegos.</td></tr>
+      <tr><td><strong>🗡️ Lengua de Suegra</strong></td><td><span class="freq-badge">Cada 14 días</span></td><td><span class="freq-badge winter">Cada 35–40 días</span></td><td>El sustrato debe estar 100% seco antes del próximo riego. En el invierno frío de Chillán puede ir hasta 6 semanas sin agua — el exceso mata.</td></tr>
       <tr><td><strong>🌸 Hortensia</strong></td><td><span class="freq-badge hot">Diario o día por medio</span></td><td><span class="freq-badge winter">1 vez/semana</span></td><td>¡Crítico en Dic–Feb! El calor seco de Chillán la deshidrata rápido. Mulching en la base ayuda.</td></tr>
       <tr><td><strong>💜 Lavanda</strong></td><td><span class="freq-badge">Cada 10–14 días</span></td><td><span class="freq-badge winter">Casi nada (lluvia basta)</span></td><td>Ama el verano seco de Chillán. No riegues si hay lluvia en invierno.</td></tr>
       <tr><td><strong>🌼 Agapanto</strong></td><td><span class="freq-badge hot">Cada 5–7 días</span></td><td><span class="freq-badge winter">Cada 3–4 semanas</span></td><td>Florece en verano, necesita agua regular en Dic–Feb. Tolera bien la sequía.</td></tr>
@@ -595,6 +611,7 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
             <option>🌿 Golden Pothos (2)</option>
             <option>🌴 Dracena Marginata</option>
             <option>🌿 Chamaedorea</option>
+            <option>🗡️ Lengua de Suegra</option>
             <option>🌸 Hortensia</option>
             <option>💜 Lavanda</option>
             <option>🌼 Agapanto</option>
@@ -668,6 +685,7 @@ const calendarData = [
     {dot:'dot-flowers', text:'Agapanto y Lavanda en plena floración'},
     {dot:'dot-flowers', text:'Bailarina: deadheading continuo'},
     {dot:'dot-general', text:'Araña roja activa — revisa envés de frondas Chamaedorea'},
+    {dot:'dot-water',   text:'Lengua de Suegra: riego cada 14 días — sustrato seco antes de regar'},
   ]},
   { month:'Febrero',    season:'verano',    tasks:[
     {dot:'dot-flowers', text:'Corta flores marchitas de Hortensia'},
@@ -698,6 +716,7 @@ const calendarData = [
     {dot:'dot-water',   text:'Riego mínimo (la lluvia es suficiente)'},
     {dot:'dot-general', text:'Mantillo en base de Hortensia y Bailarina'},
     {dot:'dot-general', text:'Chamaedorea: riego cada 18 días, nada de fertilización'},
+    {dot:'dot-water',   text:'Lengua de Suegra: reducir a 1 riego cada 40 días — casi nada'},
   ]},
   { month:'Julio',      season:'invierno',  tasks:[
     {dot:'dot-general', text:'Frío máximo en Chillán — protege macetas'},
@@ -713,7 +732,7 @@ const calendarData = [
   ]},
   { month:'Septiembre', season:'primavera', tasks:[
     {dot:'dot-transplant', text:'Trasplante Monstera — separa planta hija'},
-    {dot:'dot-transplant', text:'Trasplante Philodendron / Dracena / Chamaedorea si necesitan'},
+    {dot:'dot-transplant', text:'Trasplante Philodendron / Dracena / Chamaedorea / Lengua de Suegra si necesitan'},
     {dot:'dot-prune',   text:'Poda Lavanda (1/3 del follaje verde)'},
     {dot:'dot-fertilize',text:'Comienza a fertilizar (interior y exterior)'},
   ]},
@@ -727,7 +746,7 @@ const calendarData = [
     {dot:'dot-flowers', text:'Corta tallo tulipán al marchitar (deja hojas)'},
     {dot:'dot-flowers', text:'Lavanda: inicio floración — corta para secar'},
     {dot:'dot-flowers', text:'Deadheading en Bailarina (todo el mes)'},
-    {dot:'dot-fertilize',text:'Fertiliza interior (Monstera, Philodendron, Chamaedorea) cada 15 días'},
+    {dot:'dot-fertilize',text:'Fertiliza interior (Monstera, Philodendron, Chamaedorea, Lengua de Suegra) cada 15 días'},
   ]},
   { month:'Diciembre',  season:'verano',    tasks:[
     {dot:'dot-flowers', text:'Hortensia en floración — ¡máximo riego!'},
@@ -799,6 +818,7 @@ const PLANTS = [
   {id:'pothos',       name:'🌿 Golden Pothos',       color:'#7cb342', exterior:false, intervals:{0:8,1:8,2:10,3:10,4:12,5:16,6:16,7:16,8:9,9:9,10:9,11:8}},
   {id:'dracena',      name:'🌴 Dracena Marginata',   color:'#a0522d', exterior:false, intervals:{0:12,1:12,2:14,3:16,4:18,5:26,6:26,7:26,8:14,9:14,10:14,11:12}},
   {id:'chamaedorea',  name:'🌿 Chamaedorea',         color:'#6d9e3a', exterior:false, intervals:{0:8,1:8,2:11,3:12,4:14,5:18,6:18,7:18,8:10,9:9,10:9,11:8}},
+  {id:'sansevieria',  name:'🗡️ Lengua de Suegra',   color:'#a09e30', exterior:false, intervals:{0:14,1:14,2:21,3:28,4:35,5:40,6:40,7:40,8:21,9:18,10:14,11:14}},
   {id:'hortensia',    name:'🌸 Hortensia',           color:'#e91e8c', exterior:true,  intervals:{0:1,1:1,2:3,3:5,4:7,5:10,6:10,7:10,8:5,9:4,10:3,11:1}},
   {id:'lavanda',      name:'💜 Lavanda',             color:'#7b5ea7', exterior:true,  intervals:{0:12,1:12,2:14,3:16,4:20,5:0,6:0,7:0,8:14,9:12,10:12,11:12}},
   {id:'agapanto',     name:'🌼 Agapanto',            color:'#1565c0', exterior:true,  intervals:{0:6,1:6,2:9,3:12,4:16,5:28,6:28,7:28,8:10,9:8,10:7,11:6}},
