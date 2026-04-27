@@ -341,7 +341,6 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
   <button class="tab-btn" onclick="showSection('calendario',this)">📅 Calendario</button>
   <button class="tab-btn" onclick="showSection('riego',this)">💧 Riego</button>
   <button class="tab-btn" onclick="showSection('consejos',this)">🌱 Consejos</button>
-  <button class="tab-btn" onclick="showSection('diario',this)">📓 Diario</button>
 </nav>
 
 <main>
@@ -442,6 +441,21 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
         <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Cada 3–5 años o cuando las raíces quiebren la maceta. Le gusta estar apretada. Trasplanta en primavera.</span></div>
         <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Temperatura</span><span class="care-value">10–35 °C. Resiste el ambiente seco del invierno con calefacción. No la dejes bajo 5°C.</span></div>
         <div class="note-box">💡 La planta más resistente al olvido. El mayor riesgo es el exceso de agua — la pudrición de raíces es casi la única causa de muerte. Purifica el aire interior.</div>
+      </div>
+    </div>
+
+    <div class="plant-card">
+      <div class="plant-card-header">
+        <div class="plant-icon">🌿</div>
+        <div><div class="plant-name">Alocasia Macrorrhizos</div><span class="plant-type-badge badge-interior">Interior</span></div>
+      </div>
+      <div class="plant-card-body">
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Solo limpieza: retira hojas amarillas o marrones desde la base con tijeras limpias. No requiere poda de forma — cada hoja emerge directamente del rizoma.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Sep–Oct (primavera) cada 1–2 años cuando las raíces asomen por el drenaje. Le gusta estar algo apretada — elige maceta solo 3–4 cm más grande.</span></div>
+        <div class="care-row"><span class="care-icon">🌱</span><span class="care-label">Follaje</span><span class="care-value">Limpia las hojas grandes con paño húmedo cada 2–3 semanas — el polvo bloquea la fotosíntesis. Rocía ocasionalmente en el verano seco de Chillán para mantener humedad ambiental.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta brillante — alejada de sol directo (quema las hojas). Mínimo 15°C: en el invierno de Chillán mantenla lejos de ventanas frías. Ama la humedad ambiental alta.</span></div>
+        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Sustrato húmedo pero no encharcado. Espera que los primeros 3–4 cm sequen entre riegos. En invierno reduce significativamente — el rizoma retiene humedad y el exceso pudre las raíces.</span></div>
+        <div class="note-box">💡 Tóxica para mascotas y personas si se ingiere. Bordes marrones = fluoruro en el agua o aire muy seco. Usa agua reposada 24h. Puede dormir en invierno: no te asustes si pierde alguna hoja.</div>
       </div>
     </div>
 
@@ -557,6 +571,7 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
       <tr><td><strong>🌴 Dracena Marginata</strong></td><td><span class="freq-badge">Cada 10–14 días</span></td><td><span class="freq-badge winter">Cada 21–30 días</span></td><td>Prefiere quedarse algo seca. Usa agua reposada 24h — el flúor le mancha las hojas.</td></tr>
       <tr><td><strong>🌿 Chamaedorea</strong></td><td><span class="freq-badge">Cada 7–9 días</span></td><td><span class="freq-badge winter">Cada 14–18 días</span></td><td>Usa agua reposada 24h — también sensible al flúor. Espera que el tercio superior del sustrato seque entre riegos.</td></tr>
       <tr><td><strong>🗡️ Lengua de Suegra</strong></td><td><span class="freq-badge">Cada 14 días</span></td><td><span class="freq-badge winter">Cada 35–40 días</span></td><td>El sustrato debe estar 100% seco antes del próximo riego. En el invierno frío de Chillán puede ir hasta 6 semanas sin agua — el exceso mata.</td></tr>
+      <tr><td><strong>🌿 Alocasia Macrorrhizos</strong></td><td><span class="freq-badge">Cada 4–6 días</span></td><td><span class="freq-badge winter">Cada 12–14 días</span></td><td>Sustrato húmedo pero sin encharcamiento. Espera que los 3–4 cm superiores sequen. Ama la humedad ambiental — rocía las hojas en el verano seco de Chillán. Usa agua reposada 24h.</td></tr>
       <tr><td><strong>🌸 Hortensia</strong></td><td><span class="freq-badge hot">Diario o día por medio</span></td><td><span class="freq-badge winter">1 vez/semana</span></td><td>¡Crítico en Dic–Feb! El calor seco de Chillán la deshidrata rápido. Mulching en la base ayuda.</td></tr>
       <tr><td><strong>💜 Lavanda</strong></td><td><span class="freq-badge">Cada 10–14 días</span></td><td><span class="freq-badge winter">Casi nada (lluvia basta)</span></td><td>Ama el verano seco de Chillán. No riegues si hay lluvia en invierno.</td></tr>
       <tr><td><strong>🌼 Agapanto</strong></td><td><span class="freq-badge hot">Cada 5–7 días</span></td><td><span class="freq-badge winter">Cada 3–4 semanas</span></td><td>Florece en verano, necesita agua regular en Dic–Feb. Tolera bien la sequía.</td></tr>
@@ -588,59 +603,10 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
     <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Chamaedorea — Poda y limpieza</h4><p>No requiere poda de forma. Retira solo las frondas completamente amarillas o marrones cortando desde la base del tallo. Hazlo en cualquier época del año. Nunca cortes frondas verdes — son permanentes.</p></div></div>
     <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Chamaedorea — Trasplante</h4><p>Cada 2–3 años en sep–oct (primavera). Solo cuando las raíces asomen por el drenaje. Elige una maceta solo 3–4 cm más grande — le gusta estar algo apretada. Sustrato con buen drenaje.</p></div></div>
     <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Chamaedorea — Verano en Chillán</h4><p>En dic–feb el calor seco activa la araña roja. Revisa el envés de las frondas semanalmente. Rocía con agua las frondas 1–2 veces por semana para mantener humedad. Usa agua reposada 24h.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Alocasia — Cuidados generales</h4><p>Planta tropical que ama la humedad ambiental alta. Ubícala en el lugar más húmedo de la casa — lejos de calefactores y ventanas frías. Rocía las hojas o coloca un plato con agua y piedras debajo de la maceta para aumentar la humedad.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Alocasia — Invierno en Chillán</h4><p>En junio–agosto puede entrar en semidormancias: crecimiento lento y alguna hoja amarilla son normales. Reduce el riego a cada 12–14 días y no fertilices. Mantenla sobre 15°C y alejada de corrientes frías. No te alarmes — reactivará en septiembre.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Alocasia — Verano en Chillán</h4><p>El calor seco de dic–feb es su mayor desafío. Riega cada 4–5 días, rocía las hojas 2–3 veces por semana y aleja de la luz solar directa. Revisa el envés por araña roja — es susceptible en ambientes secos y calurosos. Usa siempre agua reposada 24h.</p></div></div>
   </div>
-</section>
-
-<!-- ══ DIARIO ══ -->
-<section id="diario" class="section">
-  <h2 class="section-title">Diario de Cuidados</h2>
-  <p class="section-subtitle">Registra tus observaciones y actividades</p>
-  <div class="journal-area">
-    <h3>Nueva entrada</h3>
-    <div class="journal-form">
-      <div class="form-row">
-        <div class="form-group"><label>Fecha</label><input type="date" id="entryDate"></div>
-        <div class="form-group">
-          <label>Planta</label>
-          <select id="entryPlant">
-            <option value="">Selecciona...</option>
-            <option>🌿 Monstera</option>
-            <option>🍃 Philodendron Brasil (1)</option>
-            <option>🍃 Philodendron Brasil (2)</option>
-            <option>🌿 Golden Pothos (1)</option>
-            <option>🌿 Golden Pothos (2)</option>
-            <option>🌴 Dracena Marginata</option>
-            <option>🌿 Chamaedorea</option>
-            <option>🗡️ Lengua de Suegra</option>
-            <option>🌸 Hortensia</option>
-            <option>💜 Lavanda</option>
-            <option>🌼 Agapanto</option>
-            <option>🌹 Bailarina</option>
-            <option>🌷 Tulipán</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Acción realizada</label>
-        <select id="entryAction">
-          <option value="">Selecciona...</option>
-          <option>💧 Riego</option>
-          <option>✂️ Poda</option>
-          <option>🪴 Trasplante</option>
-          <option>🌺 Corte de flores</option>
-          <option>🧴 Fertilización</option>
-          <option>🐛 Tratamiento de plagas</option>
-          <option>🌱 Separación planta hija (Monstera)</option>
-          <option>🌿 Limpieza de hojas</option>
-          <option>🌷 Siembra/extracción de bulbo</option>
-          <option>📝 Observación</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Notas</label><textarea id="entryNote" placeholder="¿Qué observaste? ¿Cómo está la planta?..."></textarea></div>
-      <button class="btn-save" onclick="saveEntry()">Guardar entrada</button>
-    </div>
-  </div>
-  <div id="entriesList"></div>
 </section>
 
 <!-- ══ RIEGO 2026 ══ -->
@@ -686,12 +652,14 @@ const calendarData = [
     {dot:'dot-flowers', text:'Bailarina: deadheading continuo'},
     {dot:'dot-general', text:'Araña roja activa — revisa envés de frondas Chamaedorea'},
     {dot:'dot-water',   text:'Lengua de Suegra: riego cada 14 días — sustrato seco antes de regar'},
+    {dot:'dot-water',   text:'Alocasia: riego cada 4–5 días + rociar hojas 2–3 veces/semana (calor seco)'},
   ]},
   { month:'Febrero',    season:'verano',    tasks:[
     {dot:'dot-flowers', text:'Corta flores marchitas de Hortensia'},
     {dot:'dot-flowers', text:'Agapanto: fin de floración'},
     {dot:'dot-prune',   text:'Post-poda Lavanda (tallos gastados)'},
     {dot:'dot-general', text:'Chamaedorea: limpia frondas y rocía — calor seco'},
+    {dot:'dot-general', text:'Alocasia: revisa envés de hojas por araña roja — calor seco favorece plagas'},
   ]},
   { month:'Marzo',      season:'otono',     tasks:[
     {dot:'dot-prune',   text:'Corta tallos de Agapanto agotados'},
@@ -717,6 +685,7 @@ const calendarData = [
     {dot:'dot-general', text:'Mantillo en base de Hortensia y Bailarina'},
     {dot:'dot-general', text:'Chamaedorea: riego cada 18 días, nada de fertilización'},
     {dot:'dot-water',   text:'Lengua de Suegra: reducir a 1 riego cada 40 días — casi nada'},
+    {dot:'dot-water',   text:'Alocasia: riego cada 12–14 días — puede perder hojas, es normal en semidormancia'},
   ]},
   { month:'Julio',      season:'invierno',  tasks:[
     {dot:'dot-general', text:'Frío máximo en Chillán — protege macetas'},
@@ -729,12 +698,14 @@ const calendarData = [
     {dot:'dot-prune',   text:'Poda Bailarina (forma y ramas muertas)'},
     {dot:'dot-prune',   text:'Poda leve Hortensia (solo ramas secas)'},
     {dot:'dot-general', text:'Prepara sustrato y revisa si Chamaedorea necesita trasplante'},
+    {dot:'dot-general', text:'Alocasia: comienza a despertar — observa nuevos brotes emergiendo del rizoma'},
   ]},
   { month:'Septiembre', season:'primavera', tasks:[
     {dot:'dot-transplant', text:'Trasplante Monstera — separa planta hija'},
-    {dot:'dot-transplant', text:'Trasplante Philodendron / Dracena / Chamaedorea / Lengua de Suegra si necesitan'},
+    {dot:'dot-transplant', text:'Trasplante Philodendron / Dracena / Chamaedorea / Lengua de Suegra / Alocasia si necesitan'},
     {dot:'dot-prune',   text:'Poda Lavanda (1/3 del follaje verde)'},
     {dot:'dot-fertilize',text:'Comienza a fertilizar (interior y exterior)'},
+    {dot:'dot-fertilize',text:'Alocasia: inicia fertilización mensual con abono líquido balanceado'},
   ]},
   { month:'Octubre',    season:'primavera', tasks:[
     {dot:'dot-flowers', text:'🌷 Tulipanes florecen — ¡disfrútalos!'},
@@ -769,48 +740,6 @@ function buildCalendar() {
 }
 buildCalendar();
 
-// ── JOURNAL ──
-let entries = JSON.parse(localStorage.getItem('plantEntries_chillan') || '[]');
-
-function saveEntry() {
-  const date = document.getElementById('entryDate').value;
-  const plant = document.getElementById('entryPlant').value;
-  const action = document.getElementById('entryAction').value;
-  const note = document.getElementById('entryNote').value.trim();
-  if (!date || !plant || !action) { alert('Completa la fecha, planta y acción.'); return; }
-  entries.unshift({ id: Date.now(), date, plant, action, note });
-  localStorage.setItem('plantEntries_chillan', JSON.stringify(entries));
-  renderEntries();
-  document.getElementById('entryDate').value = '';
-  document.getElementById('entryPlant').value = '';
-  document.getElementById('entryAction').value = '';
-  document.getElementById('entryNote').value = '';
-}
-
-function deleteEntry(id) {
-  entries = entries.filter(e => e.id !== id);
-  localStorage.setItem('plantEntries_chillan', JSON.stringify(entries));
-  renderEntries();
-}
-
-function renderEntries() {
-  const c = document.getElementById('entriesList');
-  if (!entries.length) { c.innerHTML = '<div class="empty-state">🌱 Aún no hay entradas. ¡Comienza a registrar!</div>'; return; }
-  c.innerHTML = '<div class="entries-list">' + entries.map(e => `
-    <div class="entry-item">
-      <div class="entry-header">
-        <div class="entry-plant">${e.plant}</div>
-        <div class="entry-date">${new Date(e.date+'T12:00:00').toLocaleDateString('es-CL',{day:'2-digit',month:'long',year:'numeric'})}</div>
-      </div>
-      <div class="entry-action">${e.action}</div>
-      ${e.note ? `<div class="entry-note">${e.note}</div>` : ''}
-      <button class="entry-delete" onclick="deleteEntry(${e.id})">✕</button>
-    </div>`).join('') + '</div>';
-}
-
-document.getElementById('entryDate').value = new Date().toISOString().split('T')[0];
-renderEntries();
-
 // ── RIEGO 2026 ──
 const PLANTS = [
   {id:'monstera',     name:'🌿 Monstera',           color:'#4a9e5c', exterior:false, intervals:{0:7,1:7,2:10,3:10,4:10,5:18,6:18,7:18,8:8,9:8,10:8,11:7}},
@@ -824,6 +753,8 @@ const PLANTS = [
   {id:'agapanto',     name:'🌼 Agapanto',            color:'#1565c0', exterior:true,  intervals:{0:6,1:6,2:9,3:12,4:16,5:28,6:28,7:28,8:10,9:8,10:7,11:6}},
   {id:'bailarina',    name:'🌹 Bailarina',           color:'#c62828', exterior:true,  intervals:{0:3,1:3,2:4,3:6,4:8,5:10,6:10,7:10,8:4,9:3,10:3,11:3}},
   {id:'tulipan',      name:'🌷 Tulipán',             color:'#f57f17', exterior:true,  intervals:{0:0,1:0,2:0,3:10,4:10,5:0,6:0,7:0,8:10,9:10,10:0,11:0}},
+  {id:'alocasia',     name:'🌿 Alocasia Macrorrhizos', color:'#1b6b3a', exterior:false, intervals:{0:5,1:5,2:7,3:9,4:11,5:13,6:14,7:13,8:8,9:7,10:6,11:5}},
+  {id:'fertfoliar',   name:'🧴 Fertilizante Foliar',  color:'#c9a84c', exterior:false, fertilizer:true, intervals:{0:30,1:30,2:15,3:15,4:15,5:30,6:30,7:30,8:15,9:15,10:15,11:30}},
 ];
 
 // All plants start Jan 1st
@@ -933,7 +864,7 @@ let activeFilters = new Set(PLANTS.map(p=>p.id));
 
 // ── EXPORT / IMPORT ──
 function exportData() {
-  const payload = { version:1, exportedAt:new Date().toISOString(), rainEvents, absenceEvents, journalEntries:entries };
+  const payload = { version:1, exportedAt:new Date().toISOString(), rainEvents, absenceEvents };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
   a.download = `bitacora_plantas_${new Date().toISOString().slice(0,10)}.json`;
@@ -951,14 +882,9 @@ function importData(ev) {
       saveRainEvents();
       absenceEvents = p.absenceEvents || {};
       saveAbsenceEvents();
-      if (Array.isArray(p.journalEntries)) {
-        entries = p.journalEntries;
-        localStorage.setItem('plantEntries_chillan', JSON.stringify(entries));
-        renderEntries();
-      }
       waterDays = buildAllDays();
       renderYear();
-      setDataStatus(`✅ Importado: ${Object.keys(rainEvents).length} lluvia(s), ${Object.keys(absenceEvents).length} ausencia(s), ${entries.length} entrada(s)`);
+      setDataStatus(`✅ Importado: ${Object.keys(rainEvents).length} lluvia(s), ${Object.keys(absenceEvents).length} ausencia(s)`);
     } catch { setDataStatus('❌ Error al leer el archivo'); }
   };
   reader.readAsText(file);
@@ -1152,7 +1078,7 @@ function openPopup(d, m, drops, key, rain, absence) {
   const plantsHtml = absence
     ? `<div class="popup-no-water">✈️ Ausente — riegos postergados al siguiente día disponible</div>`
     : drops.length
-      ? drops.map(dr=>`<div class="popup-plant-item"><div class="popup-plant-dot" style="background:${dr.color}"></div><span>${dr.name}</span><span style="font-size:10px;color:${dr.exterior?'#7a6340':'#4a6741'};margin-left:auto">${dr.exterior?'exterior':'interior'}</span></div>`).join('')
+      ? drops.map(dr=>`<div class="popup-plant-item"><div class="popup-plant-dot" style="background:${dr.color}"></div><span>${dr.name}</span><span style="font-size:10px;color:${dr.fertilizer?'#9a7520':dr.exterior?'#7a6340':'#4a6741'};margin-left:auto">${dr.fertilizer?'aplicar foliar':dr.exterior?'exterior':'interior'}</span></div>`).join('')
       : `<div class="popup-no-water">Sin riego programado este día</div>`;
 
   const selMod = rain==='moderate' ? 'selected-moderate' : '';
