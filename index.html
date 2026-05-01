@@ -297,6 +297,13 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
 .absence-btn { flex: 1; padding: 8px 10px; border-radius: 10px; border: 2px solid rgba(245,166,35,0.4); background: white; cursor: pointer; font-size: 13px; font-family: 'Jost', sans-serif; transition: all 0.15s; }
 .absence-btn.remove { border-color: #e57373; color: #c62828; }
 .absence-status { margin-top: 8px; font-size: 12px; color: #7a5000; background: #fff8e7; padding: 8px 12px; border-radius: 8px; border: 1px solid #f5d06b; }
+.manual-section { margin-top: 16px; padding-top: 14px; border-top: 1px dashed rgba(74,103,65,0.15); }
+.manual-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.manual-tag { display: inline-flex; align-items: center; gap: 6px; background: #f5f0e8; border: 1px solid rgba(74,103,65,0.2); border-radius: 20px; padding: 4px 10px 4px 8px; font-size: 12px; color: var(--ink); }
+.manual-tag-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.manual-tag-remove { background: none; border: none; cursor: pointer; font-size: 13px; color: rgba(30,40,32,0.35); padding: 0 0 0 2px; line-height: 1; }
+.manual-tag-remove:hover { color: #c62828; }
+.manual-plant-select { flex: 1; min-width: 0; padding: 8px 10px; border-radius: 10px; border: 2px solid rgba(74,103,65,0.2); background: white; font-size: 13px; font-family: 'Jost', sans-serif; color: var(--ink); cursor: pointer; }
 
 /* DATA TOOLBAR */
 .data-toolbar {
@@ -459,6 +466,21 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
       </div>
     </div>
 
+    <div class="plant-card">
+      <div class="plant-card-header">
+        <div class="plant-icon">🌿</div>
+        <div><div class="plant-name">Plectranthus verticillatus</div><span class="plant-type-badge badge-interior">Interior</span></div>
+      </div>
+      <div class="plant-card-body">
+        <div class="care-row"><span class="care-icon">✂️</span><span class="care-label">Poda</span><span class="care-value">Sep–Nov (primavera): poda de forma para mantenerla compacta y estimular ramificación. Pellizca los brotes terminales regularmente durante la temporada de crecimiento (sep–mar) para evitar que se vuelva rastrera y desnuda.</span></div>
+        <div class="care-row"><span class="care-icon">🪴</span><span class="care-label">Trasplante</span><span class="care-value">Sep–Oct cada 1–2 años. Crece rápido y agota el sustrato con facilidad — señales: raíces por el drenaje o crecimiento muy lento. Usa sustrato liviano con buen drenaje.</span></div>
+        <div class="care-row"><span class="care-icon">🌺</span><span class="care-label">Flores</span><span class="care-value">Floración: Oct–Feb (primavera y verano). Pequeñas flores lila o blancas en espigas. Retira los tallos florales al marchitarse para redirigir energía al follaje.</span></div>
+        <div class="care-row"><span class="care-icon">🌡️</span><span class="care-label">Ambiente</span><span class="care-value">Luz indirecta brillante a semisombra — tolera menos luz que otras suculentas. Mínimo 10°C: en el invierno de Chillán mantenla alejada de ventanas frías y corrientes de aire.</span></div>
+        <div class="care-row"><span class="care-icon">💧</span><span class="care-label">Riego</span><span class="care-value">Deja secar los primeros 2–3 cm entre riegos. Muy sensible al encharcamiento — tallo carnoso que pudre rápido. En invierno reduce drásticamente: cada 18–20 días es suficiente.</span></div>
+        <div class="note-box">💡 Propagación facilísima: un esqueje en agua enraíza en 1–2 semanas. Hojas suculentas almacenan agua — es mejor quedarse corto en el riego que pasarse. Las hojas caídas o blandas indican exceso de agua.</div>
+      </div>
+    </div>
+
   </div>
 
   <div class="section-group-label">Exterior</div>
@@ -572,6 +594,7 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
       <tr><td><strong>🌿 Chamaedorea</strong></td><td><span class="freq-badge">Cada 7–9 días</span></td><td><span class="freq-badge winter">Cada 14–18 días</span></td><td>Usa agua reposada 24h — también sensible al flúor. Espera que el tercio superior del sustrato seque entre riegos.</td></tr>
       <tr><td><strong>🗡️ Lengua de Suegra</strong></td><td><span class="freq-badge">Cada 14 días</span></td><td><span class="freq-badge winter">Cada 35–40 días</span></td><td>El sustrato debe estar 100% seco antes del próximo riego. En el invierno frío de Chillán puede ir hasta 6 semanas sin agua — el exceso mata.</td></tr>
       <tr><td><strong>🌿 Alocasia Macrorrhizos</strong></td><td><span class="freq-badge">Cada 4–6 días</span></td><td><span class="freq-badge winter">Cada 12–14 días</span></td><td>Sustrato húmedo pero sin encharcamiento. Espera que los 3–4 cm superiores sequen. Ama la humedad ambiental — rocía las hojas en el verano seco de Chillán. Usa agua reposada 24h.</td></tr>
+      <tr><td><strong>🌿 Plectranthus verticillatus</strong></td><td><span class="freq-badge">Cada 7–8 días</span></td><td><span class="freq-badge winter">Cada 18–20 días</span></td><td>Hojas carnosas que almacenan agua — mejor quedarse corto. Deja secar los 2–3 cm superiores. Si las hojas se sienten blandas o caen, es exceso de agua, no falta.</td></tr>
       <tr><td><strong>🌸 Hortensia</strong></td><td><span class="freq-badge hot">Diario o día por medio</span></td><td><span class="freq-badge winter">1 vez/semana</span></td><td>¡Crítico en Dic–Feb! El calor seco de Chillán la deshidrata rápido. Mulching en la base ayuda.</td></tr>
       <tr><td><strong>💜 Lavanda</strong></td><td><span class="freq-badge">Cada 10–14 días</span></td><td><span class="freq-badge winter">Casi nada (lluvia basta)</span></td><td>Ama el verano seco de Chillán. No riegues si hay lluvia en invierno.</td></tr>
       <tr><td><strong>🌼 Agapanto</strong></td><td><span class="freq-badge hot">Cada 5–7 días</span></td><td><span class="freq-badge winter">Cada 3–4 semanas</span></td><td>Florece en verano, necesita agua regular en Dic–Feb. Tolera bien la sequía.</td></tr>
@@ -606,6 +629,8 @@ main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
     <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Alocasia — Cuidados generales</h4><p>Planta tropical que ama la humedad ambiental alta. Ubícala en el lugar más húmedo de la casa — lejos de calefactores y ventanas frías. Rocía las hojas o coloca un plato con agua y piedras debajo de la maceta para aumentar la humedad.</p></div></div>
     <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Alocasia — Invierno en Chillán</h4><p>En junio–agosto puede entrar en semidormancias: crecimiento lento y alguna hoja amarilla son normales. Reduce el riego a cada 12–14 días y no fertilices. Mantenla sobre 15°C y alejada de corrientes frías. No te alarmes — reactivará en septiembre.</p></div></div>
     <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Alocasia — Verano en Chillán</h4><p>El calor seco de dic–feb es su mayor desafío. Riega cada 4–5 días, rocía las hojas 2–3 veces por semana y aleja de la luz solar directa. Revisa el envés por araña roja — es susceptible en ambientes secos y calurosos. Usa siempre agua reposada 24h.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Plectranthus — Poda y forma</h4><p>Pellizca los brotes terminales regularmente desde sep–nov (primavera) para mantenerla compacta y ramificada. Si se vuelve rastrera o desnuda en la base, una poda fuerte en septiembre la rejuvenece completamente. Los esquejes que recortes enraízan en agua en 1–2 semanas.</p></div></div>
+    <div class="tip-card"><div class="tip-emoji">🌿</div><div class="tip-content"><h4>Plectranthus — Riego y sustrato</h4><p>Es una suculenta de hoja: almacena agua en el tallo y las hojas. En el invierno de Chillán (jun–ago) riega cada 18–20 días — el frío + exceso de agua pudre el cuello de la planta rápidamente. Si el tallo se pone blando o marrón en la base, hay pudrición: corta los tallos sanos y propaga de inmediato.</p></div></div>
   </div>
 </section>
 
@@ -653,6 +678,7 @@ const calendarData = [
     {dot:'dot-general', text:'Araña roja activa — revisa envés de frondas Chamaedorea'},
     {dot:'dot-water',   text:'Lengua de Suegra: riego cada 14 días — sustrato seco antes de regar'},
     {dot:'dot-water',   text:'Alocasia: riego cada 4–5 días + rociar hojas 2–3 veces/semana (calor seco)'},
+    {dot:'dot-flowers', text:'Plectranthus: floración activa — retira espigas marchitas para prolongarla'},
   ]},
   { month:'Febrero',    season:'verano',    tasks:[
     {dot:'dot-flowers', text:'Corta flores marchitas de Hortensia'},
@@ -666,6 +692,7 @@ const calendarData = [
     {dot:'dot-general', text:'Reduce fertilización gradualmente'},
     {dot:'dot-water',   text:'Reduce riego al bajar temperatura'},
     {dot:'dot-prune',   text:'Chamaedorea: retira frondas amarillas de la base'},
+    {dot:'dot-prune',   text:'Plectranthus: última poda de forma antes del otoño — reduce a 2/3 del volumen'},
   ]},
   { month:'Abril',      season:'otono',     tasks:[
     {dot:'dot-transplant', text:'🌷 Planta bulbos de Tulipán (15–20 cm)'},
@@ -686,6 +713,7 @@ const calendarData = [
     {dot:'dot-general', text:'Chamaedorea: riego cada 18 días, nada de fertilización'},
     {dot:'dot-water',   text:'Lengua de Suegra: reducir a 1 riego cada 40 días — casi nada'},
     {dot:'dot-water',   text:'Alocasia: riego cada 12–14 días — puede perder hojas, es normal en semidormancia'},
+    {dot:'dot-water',   text:'Plectranthus: riego cada 18–20 días — frío + humedad = pudrición de cuello'},
   ]},
   { month:'Julio',      season:'invierno',  tasks:[
     {dot:'dot-general', text:'Frío máximo en Chillán — protege macetas'},
@@ -702,16 +730,18 @@ const calendarData = [
   ]},
   { month:'Septiembre', season:'primavera', tasks:[
     {dot:'dot-transplant', text:'Trasplante Monstera — separa planta hija'},
-    {dot:'dot-transplant', text:'Trasplante Philodendron / Dracena / Chamaedorea / Lengua de Suegra / Alocasia si necesitan'},
+    {dot:'dot-transplant', text:'Trasplante Philodendron / Dracena / Chamaedorea / Lengua de Suegra / Alocasia / Plectranthus si necesitan'},
     {dot:'dot-prune',   text:'Poda Lavanda (1/3 del follaje verde)'},
     {dot:'dot-fertilize',text:'Comienza a fertilizar (interior y exterior)'},
     {dot:'dot-fertilize',text:'Alocasia: inicia fertilización mensual con abono líquido balanceado'},
+    {dot:'dot-prune',   text:'Plectranthus: poda de rejuvenecimiento — pellizca brotes para estimular ramificación'},
   ]},
   { month:'Octubre',    season:'primavera', tasks:[
     {dot:'dot-flowers', text:'🌷 Tulipanes florecen — ¡disfrútalos!'},
     {dot:'dot-transplant', text:'Trasplante Lavanda si es necesario'},
     {dot:'dot-flowers', text:'Bailarina: primeros brotes florales'},
     {dot:'dot-fertilize',text:'Chamaedorea: fertiliza cada 20 días hasta marzo'},
+    {dot:'dot-flowers', text:'Plectranthus: primeras espigas florales lila/blancas — retira al marchitar'},
   ]},
   { month:'Noviembre',  season:'primavera', tasks:[
     {dot:'dot-flowers', text:'Corta tallo tulipán al marchitar (deja hojas)'},
@@ -753,8 +783,9 @@ const PLANTS = [
   {id:'agapanto',     name:'🌼 Agapanto',            color:'#1565c0', exterior:true,  intervals:{0:6,1:6,2:9,3:12,4:16,5:28,6:28,7:28,8:10,9:8,10:7,11:6}},
   {id:'bailarina',    name:'🌹 Bailarina',           color:'#c62828', exterior:true,  intervals:{0:3,1:3,2:4,3:6,4:8,5:10,6:10,7:10,8:4,9:3,10:3,11:3}},
   {id:'tulipan',      name:'🌷 Tulipán',             color:'#f57f17', exterior:true,  intervals:{0:0,1:0,2:0,3:10,4:10,5:0,6:0,7:0,8:10,9:10,10:0,11:0}},
-  {id:'alocasia',     name:'🌿 Alocasia Macrorrhizos', color:'#1b6b3a', exterior:false, intervals:{0:5,1:5,2:7,3:9,4:11,5:13,6:14,7:13,8:8,9:7,10:6,11:5}},
-  {id:'fertfoliar',   name:'🧴 Fertilizante Foliar',  color:'#c9a84c', exterior:false, fertilizer:true, intervals:{0:30,1:30,2:15,3:15,4:15,5:30,6:30,7:30,8:15,9:15,10:15,11:30}},
+  {id:'alocasia',     name:'🌿 Alocasia Macrorrhizos',        color:'#1b6b3a', exterior:false, intervals:{0:5,1:5,2:7,3:9,4:11,5:13,6:14,7:13,8:8,9:7,10:6,11:5}},
+  {id:'plectranthus', name:'🌿 Plectranthus verticillatus',   color:'#9b7eb8', exterior:false, intervals:{0:7,1:8,2:10,3:12,4:14,5:18,6:20,7:18,8:10,9:8,10:7,11:7}},
+  {id:'fertfoliar',   name:'🧴 Fertilizante Foliar',          color:'#c9a84c', exterior:false, fertilizer:true, intervals:{0:30,1:30,2:15,3:15,4:15,5:30,6:30,7:30,8:15,9:15,10:15,11:30}},
 ];
 
 // All plants start Jan 1st
@@ -765,6 +796,9 @@ function saveRainEvents() { localStorage.setItem('rainEvents_chillan', JSON.stri
 
 let absenceEvents = JSON.parse(localStorage.getItem('absenceEvents_chillan') || '{}');
 function saveAbsenceEvents() { localStorage.setItem('absenceEvents_chillan', JSON.stringify(absenceEvents)); }
+
+let manualWaterEvents = JSON.parse(localStorage.getItem('manualWaterEvents_chillan') || '{}');
+function saveManualWaterEvents() { localStorage.setItem('manualWaterEvents_chillan', JSON.stringify(manualWaterEvents)); }
 
 function dateToIdx(key) {
   const [y,m,d] = key.split('-').map(Number);
@@ -789,6 +823,10 @@ function shiftAbsence(key) {
 
 function buildPlantDays(p) {
   const days = new Set();
+  const pManual = (manualWaterEvents[p.id] || []).filter(k => k.startsWith('2026-'));
+  pManual.forEach(k => days.add(k));
+  const pManualSorted = pManual.map(k => ({ idx: dateToIdx(k), key: k })).sort((a,b) => a.idx - b.idx);
+
   if (!p.exterior) {
     let next = START_IDX;
     while (next < 365) {
@@ -804,7 +842,13 @@ function buildPlantDays(p) {
       const waterIdx = dateToIdx(key);
       if (waterIdx >= 365) break;
       days.add(key);
-      next = waterIdx + iv;
+      let nextIdx = waterIdx + iv;
+      const manualFirst = pManualSorted.find(m => m.idx > waterIdx && m.idx < nextIdx);
+      if (manualFirst) {
+        const mIv = p.intervals[keyToMonth(manualFirst.key)];
+        if (mIv) nextIdx = manualFirst.idx + mIv;
+      }
+      next = nextIdx;
     }
     return days;
   }
@@ -836,18 +880,24 @@ function buildPlantDays(p) {
     if (waterIdx >= 365) break;
     days.add(key);
     let nextIdx = waterIdx + iv;
-    // Find last rain in window (waterIdx, nextIdx]
-    const rainWindow = effectiveRainList.filter(r => r.idx > waterIdx && r.idx <= nextIdx);
-    if (rainWindow.length > 0) {
-      const lr = rainWindow[rainWindow.length-1];
-      const lrIv = p.intervals[keyToMonth(idxToKey(lr.idx))] || iv;
-      nextIdx = lr.idx + (lr.type==='intense' ? lrIv : Math.ceil(lrIv/2));
+    // Manual watering takes priority: if user watered early, reset from that date
+    const manualFirst = pManualSorted.find(m => m.idx > waterIdx && m.idx < nextIdx);
+    if (manualFirst) {
+      const mIv = p.intervals[keyToMonth(manualFirst.key)];
+      if (mIv) { next = manualFirst.idx + mIv; continue; }
     }
-    // Rain exactly on the next scheduled day
-    const onDay = effectiveRainList.find(r => r.idx === nextIdx);
-    if (onDay) {
-      const odIv = p.intervals[keyToMonth(idxToKey(onDay.idx))] || iv;
-      nextIdx = onDay.idx + (onDay.type==='intense' ? odIv : Math.ceil(odIv/2));
+    // Expansión iterativa: cada evento de lluvia puede revelar lluvia posterior
+    // que empuje la fecha aún más — se repite hasta que no haya más lluvia en la ventana
+    let rainBase = waterIdx;
+    for (let guard = 0; guard < 20; guard++) {
+      const rw = effectiveRainList.filter(r => r.idx > rainBase && r.idx <= nextIdx);
+      if (!rw.length) break;
+      const lr = rw[rw.length - 1];
+      const lrIv = p.intervals[keyToMonth(idxToKey(lr.idx))] || iv;
+      const pushed = lr.idx + (lr.type === 'intense' ? lrIv : Math.ceil(lrIv / 2));
+      if (pushed <= nextIdx) break;
+      rainBase = lr.idx;
+      nextIdx = pushed;
     }
     next = nextIdx;
   }
@@ -864,7 +914,7 @@ let activeFilters = new Set(PLANTS.map(p=>p.id));
 
 // ── EXPORT / IMPORT ──
 function exportData() {
-  const payload = { version:1, exportedAt:new Date().toISOString(), rainEvents, absenceEvents };
+  const payload = { version:1, exportedAt:new Date().toISOString(), rainEvents, absenceEvents, manualWaterEvents };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));
   a.download = `bitacora_plantas_${new Date().toISOString().slice(0,10)}.json`;
@@ -882,9 +932,12 @@ function importData(ev) {
       saveRainEvents();
       absenceEvents = p.absenceEvents || {};
       saveAbsenceEvents();
+      manualWaterEvents = p.manualWaterEvents || {};
+      saveManualWaterEvents();
       waterDays = buildAllDays();
       renderYear();
-      setDataStatus(`✅ Importado: ${Object.keys(rainEvents).length} lluvia(s), ${Object.keys(absenceEvents).length} ausencia(s)`);
+      const manualCount = Object.values(manualWaterEvents).reduce((s,v) => s + v.length, 0);
+      setDataStatus(`✅ Importado: ${Object.keys(rainEvents).length} lluvia(s), ${Object.keys(absenceEvents).length} ausencia(s), ${manualCount} riego(s) adelantado(s)`);
     } catch { setDataStatus('❌ Error al leer el archivo'); }
   };
   reader.readAsText(file);
@@ -1084,6 +1137,13 @@ function openPopup(d, m, drops, key, rain, absence) {
   const selMod = rain==='moderate' ? 'selected-moderate' : '';
   const selInt = rain==='intense' ? 'selected-intense' : '';
 
+  const manualOnDay = PLANTS.filter(p => !p.fertilizer && (manualWaterEvents[p.id] || []).includes(key));
+  const eligiblePlants = PLANTS.filter(p => !p.fertilizer && p.intervals[m] !== 0);
+  const manualTagsHtml = manualOnDay.map(p =>
+    `<span class="manual-tag"><span class="manual-tag-dot" style="background:${p.color}"></span>${p.name}<button class="manual-tag-remove" onclick="removeManualWater('${p.id}','${key}')">✕</button></span>`
+  ).join('');
+  const manualPlantOptions = eligiblePlants.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+
   const overlay = document.createElement('div');
   overlay.className = 'day-popup-overlay';
   overlay.id = 'dayPopupOverlay';
@@ -1114,6 +1174,18 @@ function openPopup(d, m, drops, key, rain, absence) {
         ${absence
           ? `<div class="absence-status">Riegos del día postergados al siguiente día disponible</div>`
           : `<div class="rain-hint">Si no puedes regar, los riegos se posponen un día</div>`}
+      </div>
+      <div class="manual-section">
+        <div class="rain-section-label">💧 Riego adelantado</div>
+        ${manualTagsHtml ? `<div class="manual-tags">${manualTagsHtml}</div>` : ''}
+        <div class="rain-btns">
+          <select id="manualPlantSel" class="manual-plant-select">
+            <option value="">Selecciona planta...</option>
+            ${manualPlantOptions}
+          </select>
+          <button class="rain-btn" onclick="addManualWater('${key}')">💧 Registrar</button>
+        </div>
+        <div class="rain-hint">Reinicia el contador de esa planta desde este día</div>
       </div>
     </div>`;
   overlay.addEventListener('click', e => { if(e.target===overlay) closeDayPopup(); });
@@ -1156,6 +1228,30 @@ function removeAbsenceDirect(key) {
   delete absenceEvents[key]; saveAbsenceEvents();
   waterDays = buildAllDays(); renderYear();
 }
+
+function addManualWater(key) {
+  const plantId = document.getElementById('manualPlantSel').value;
+  if (!plantId) return;
+  if (!manualWaterEvents[plantId]) manualWaterEvents[plantId] = [];
+  if (!manualWaterEvents[plantId].includes(key)) {
+    manualWaterEvents[plantId].push(key);
+    manualWaterEvents[plantId].sort();
+  }
+  saveManualWaterEvents();
+  waterDays = buildAllDays();
+  closeDayPopup();
+  renderYear();
+}
+function removeManualWater(plantId, key) {
+  if (!manualWaterEvents[plantId]) return;
+  manualWaterEvents[plantId] = manualWaterEvents[plantId].filter(k => k !== key);
+  if (!manualWaterEvents[plantId].length) delete manualWaterEvents[plantId];
+  saveManualWaterEvents();
+  waterDays = buildAllDays();
+  closeDayPopup();
+  renderYear();
+}
+
 function closeDayPopup() { const el=document.getElementById('dayPopupOverlay'); if(el) el.remove(); }
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeDayPopup(); });
 
